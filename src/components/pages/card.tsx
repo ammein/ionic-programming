@@ -3,6 +3,8 @@ import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, 
 import {Link} from 'react-router-dom';
 import { MyRoutes } from '../../utils/routes';
 import { Interface } from 'readline';
+import {getPath , getTitle} from '../../utils/routes-utils';
+import AnotherPage from '../pages/anotherPage';
 
 export interface Props {
     children? : JSX.Element
@@ -12,31 +14,16 @@ class Cards extends Component{
 
     constructor(props : Props){
         super(props);
-        this.state = {
-            ...MyRoutes
-        }
-    }
-
-    getPath(path : string) : any{
-        const routes : any = {...this.state};
-        for (let property in routes) {
-            if (routes.hasOwnProperty(property)) {
-                console.log(property)
-                if(routes[property].path === path){
-                    return path;
-                }
-            }
-        }
     }
 
     render(){
         return (
             <>
-                <Link to={this.getPath("/arrivals")}>
+                <Link to={getPath(AnotherPage)}>
                     <IonCard>
                         <IonCardHeader>
                             <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-                            <IonCardTitle>Card Title</IonCardTitle>
+                            <IonCardTitle>{getTitle(AnotherPage)}</IonCardTitle>
                         </IonCardHeader>
 
                         <IonCardContent>
