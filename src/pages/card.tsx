@@ -1,9 +1,9 @@
 import React , { Component } from 'react';
 import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import {Link} from 'react-router-dom';
-import { MyRoutes } from '../../utils/routes';
+import { MyRoutes } from '../utils/routes';
 import { Interface } from 'readline';
-import {getPath , getTitle} from '../../utils/routes-utils';
+import {getPath , getTitle} from '../utils/routes-utils';
 import AnotherPage from '../pages/anotherPage';
 
 export interface Props {
