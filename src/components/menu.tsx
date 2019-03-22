@@ -1,6 +1,7 @@
 import React , { Component } from 'react';
-import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonMenuButton , IonMenuToggle } from '@ionic/react';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonMenuButton , IonMenuToggle, IonLabel } from '@ionic/react';
 import {MyRoutes} from '../utils/routes';
+import { Link } from 'react-router-dom';
 
 export type Props={
     children? : JSX.Element
@@ -20,32 +21,38 @@ class Menu extends Component<Props, State>{
     }
 
     generateMenu(){
-        const allRoutes : any= [...this.state.allRoutes];
+        const allRoutes = [...this.state.allRoutes];
 
-        debugger;
+        return allRoutes.map((props, index) =>{
+            return (
+                <IonMenuToggle key={props.title} autoHide={false}>
+                {/* Use react-router-dom for better switching without href */}
+                    <Link to={props.path}>
+                        <IonItem>
+                            <IonLabel>
+                                {props.title}
+                            </IonLabel>
+                        </IonItem>
+                    </Link>
+                </IonMenuToggle>
+            )
+        })
     }
 
     render(){
         return (
-            <>
-                <IonMenu side="start" menuId="first" swipeGesture={true}>
-                    <IonHeader>
-                        <IonToolbar color="primary">
-                            <IonTitle>Start Menu</IonTitle>
-                        </IonToolbar>
-                    </IonHeader>
-                    <IonContent>
-                        <IonList>
-                            <IonItem>Menu Item</IonItem>
-                            <IonItem>Menu Item</IonItem>
-                            <IonItem>Menu Item</IonItem>
-                            <IonItem>Menu Item</IonItem>
-                            <IonItem>Menu Item</IonItem>
-                        </IonList>
-                    </IonContent>
-                </IonMenu>
-                <IonMenuToggle/>
-            </>
+            <IonMenu type="overlay" side="start" contentId="main" swipeGesture={true}>
+                <IonHeader>
+                    <IonToolbar color="primary">
+                        <IonTitle>Menu</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
+                <IonContent>
+                    <IonList>
+                        {this.generateMenu()}
+                    </IonList>
+                </IonContent>
+            </IonMenu>
         )
     }
 }

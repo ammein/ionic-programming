@@ -1,24 +1,14 @@
 import React from 'react';
-import history from 'history/createBrowserHistory';
-import { IonList, IonItem, IonLabel, IonInput, IonToggle, IonRadio, IonCheckbox, IonItemSliding, IonItemOption, IonItemOptions , IonApp } from '@ionic/react';
-import Menu from '../components/menu';
+import { IonList, IonItem, IonLabel } from '@ionic/react';
 import Content from '../HOC/content';
-import Header from '../components/header';
+import { Props } from '../utils/headerProps';
 
-
-export interface Props {
-    children? : JSX.Element
-}
-
-class AnotherPage extends React.Component<any , any> {
+class Arrivals extends React.Component<Props , {}> {
 
     render(){
         return (
             <>
-            <IonApp>
                 <Content>
-                    <Header/>
-                    <Menu/>
                     {/*-- List of Text Items --*/}
                     <IonList>
                         <IonItem key="Pokémon Yellow">
@@ -38,10 +28,9 @@ class AnotherPage extends React.Component<any , any> {
                         </IonItem>
                     </IonList>
                 </Content>
-                </IonApp>
             </>
         )
     }
 }
 
-export default AnotherPage;
+export default Arrivals;

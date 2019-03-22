@@ -1,16 +1,14 @@
 import React , { Component } from 'react';
 import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import {Link} from 'react-router-dom';
-import { MyRoutes } from '../utils/routes';
-import { Interface } from 'readline';
 import {getPath , getTitle} from '../utils/routes-utils';
-import AnotherPage from '../pages/anotherPage';
+import AnotherPage from './arrivals';
 
 export interface Props {
     children? : JSX.Element
 }
 
-class Cards extends Component{
+class Home extends Component{
 
     constructor(props : Props){
         super(props);
@@ -72,4 +70,4 @@ class Cards extends Component{
     }
 }
 
-export default Cards;
+export default Home;

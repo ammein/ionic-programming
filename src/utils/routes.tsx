@@ -1,11 +1,12 @@
 import React , {Component } from 'react';
-import { BrowserRouter as Router, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import App from '../App';
-import AnotherPage from '../pages/anotherPage';
-import Cards from '../pages/card';
+import Arrivals from '../pages/arrivals';
+import Home from '../pages/home';
 var history = require('history').createBrowserHistory;
+import {IonPage, IonSplitPane, IonRouterOutlet} from '@ionic/react';
 import Menu from '../components/menu';
-import {IonRouterOutlet} from '@ionic/react'
+import Lists from '../pages/lists';
 
 export interface RoutesDef {
     title : string,
@@ -24,12 +25,16 @@ const MyRoutes : RoutesDef[] = [
     {
         title : "New Arrivals",
         path : "/arrivals",
-        component : AnotherPage
+        component : Arrivals
     },
     {
         title : "Cards",
         path : "/cards",
-        component : Cards
+        component : Home
+    },{
+        title : "Arrivals",
+        path : "/lists",
+        component : Lists
     }
 ]
 
@@ -85,11 +90,25 @@ class Routes extends Component<Props, State>{
         });
     }
 
+    generateList(){
+
+    }
+
     render(){
         return (
-            <Router>
-                {this.renderPath()}
-            </Router>
+                <Router>
+                    {/* For Render List */}
+                    <IonSplitPane contentId="main">
+                    <Menu/>
+                    {/* For Render Page with Route */}
+                    {/* Must use id="main" for let it main content */}
+                    <IonPage id="main">
+                        <IonRouterOutlet>
+                            {this.renderPath()}
+                        </IonRouterOutlet>
+                    </IonPage>
+                </IonSplitPane>
+                </Router>
         )
     }
 }

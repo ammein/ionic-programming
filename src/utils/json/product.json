@@ -1,0 +1,158 @@
+{
+  "laptops" : [
+      {
+        "name" : "Dell Alienware CA17-8716126G-1060 17.3",  
+        "brand" : "Dell",
+        "price" : 9999.00,
+        "discountPrice" : 8345.00,
+        "specification" : ["Intel(R) Core(TM) i7-8750H (6-Core, 9MB Cache, up to 4.1GHz w/ Turbo Boost)", 
+            "16GB, 1x16GB, DDR4, 2666MHz", 
+            "256GB PCIe M.2 SSD + 1TB 7200RPM HDD",
+            "NVIDIA GeForce GTX 1060 with 6GB GDDR5 graphics memory", 
+            "17.3 inch FHD (1920 x 1080) 60Hz IPS Anti-Glare 300-nits NVIDIA G-SYNC Enabled",
+            "Windows 10 Home (64bit) Single Language English",
+            "1Yr Premium Support Plus:Onsite Service-Retail"],
+        "delivery" : "4-8 days",
+        "imgProduct" : "https://ibb.co/Swhch2z"
+      },
+      {
+        "name" : "Dell Alienware 15 M15-8716128G-1070 15.6",  
+        "brand" : "Dell",
+        "price" : 9999.00,
+        "discountPrice" : 8729.00,
+        "specification" : ["Intel® Core™ i7-8750H (6-Core, 9MB Cache, up to 4.1GHz w/ Turbo Boost)", 
+            "16GB, (2x8GB), DDR4, 2666MHz Ram", 
+            "256GB PCIe M.2 SSD + 1TB (+8GB SSHD) Hybrid Drive",
+            "NVIDIA® GeForce® GTX 1070 Max-Q design with 8GB GDDR5", 
+            "15.6 FHD (1920 x 1080) 144Hz IPS, 300-nits 72% color gamut, Narrow-Border",
+            "Windows 10 Home (64bit) Single Language English",
+            "1Yr Premium Support Plus:Onsite Service-Retail"],
+        "delivery" : "4-8 days",
+        "imgProduct" : "https://ibb.co/0y3n2p4"
+      },
+      {
+        "name" : "Dell Inspiron Gaming G7 7588",  
+        "brand" : "Dell",
+        "price" : 5999.00,
+        "discountPrice" : 4399.00,
+        "specification" : ["Intel® Core™ i7-8750H Processor (6 Core / 12 Thread, 9MB Smart Cache, up to 4.1GHz w/ Turbo Boost)", 
+            "8GB DDR4, 2666MHz", 
+            "1TB 5400 rpm Hybrid Hard Drive with 128GB SSD",
+            "NVIDIA® GeForce® GTX 1050Ti with 4GB GDDR5 graphics memory", 
+            "15.6-inch FHD (1920 x 1080) IPS Anti-Glare LED-Backlit Display",
+            "Windows 10 Home (64bit) Single Language English",
+            "2Yr Premium Support:Onsite Service W/Accidental Damage-Retail"],
+        "delivery" : "3-6 days",
+        "imgProduct" : "https://ibb.co/1L285K3"
+      },
+      {
+        "name" : "Dell Inspiron Gaming G3 3579",  
+        "brand" : "Dell",
+        "price" : 6999.00,
+        "discountPrice" : 4899.00,
+        "specification" : ["Intel® Core™ i7-8750H Processor (6 Core / 12 Thread, 9MB Smart Cache, up to 4.1GHz w/ Turbo Boost)", 
+            "8GB DDR4, 2666MHz", 
+            "1TB 5400 rpm Hybrid Hard Drive with 128GB SSD",
+            "NVIDIA GeForce GTX 1060 with 6GB GDDR5 graphics memory Max-Q", 
+            "15.6-inch FHD (1920 x 1080) IPS Anti-Glare LED-Backlit Display",
+            "Windows 10 Home (64bit) Single Language English",
+            "2Yr Premium Support:Onsite Service W/Accidental Damage-Retail"],
+        "delivery" : "3-6 days",
+        "imgProduct" : "https://ibb.co/QDZDjfq"
+      }
+  ] ,
+  
+"desktops" :[
+        {
+            "name" : "DELL ALIENWARE AURORA R8-99161511G",  
+            "brand" : "Dell",
+            "price" : 14899.00,
+            "discountPrice" : 14250.00,
+            "specification" : ["Intel® Core™ i9 9900K (8-Core/16-Thread, 16MB Cache, Overclocked up to 4.7GHz across all cores)", 
+                "16GB Dual Channel DDR4 at 2666MHz", 
+                "512GB M.2 PCIe NVMe SSD (Boot) + 1TB 7200RPM SATA 6Gb/s (Storage)",
+                "NVIDIA® GeForce® RTX 2080 Ti OC with 11GB GDDR6", 
+                "Windows 10 Home (64bit) Single Language English"],
+                
+            "delivery" : "3-6 days",
+            "imgProduct" : "https://ibb.co/2sZpb96"
+        },
+        {
+            "name" : "Dell Alienware Aurora R7-7016128G-1070D ",  
+            "brand" : "Dell",
+            "price" : 9999.00,
+            "discountPrice" : 8799.00,
+            "specification" : ["Intel(R) Core(TM) i7 8700 (6-Core/12-Thread, 12MB Cache, up to 4.6GHz with Intel(R) Turbo Boost Technology)", 
+                "16GB Dual Channel DDR4 at 2666MHz (2X8GB)", 
+                "256GB PCIe SSD (Boot) + 1TB 7200RPM SATA 6Gb/s (Storage)",
+                "Dual NVIDIA(R) GeForce(R) GTX 1070 with 8GB GDDR5 each (NVIDIA SLI(R) Enabled)", 
+                "Windows 10 Home (64bit) Single Language English",
+                 "1Yr Premium Support Plus:Onsite Service"],
+                
+            "delivery" : "3-6 days",
+            "imgProduct" : "https://ibb.co/6ZJMzj1"
+        },
+        {
+            "name" : "Dell XPS 8930 Desktop Gaming PC",  
+            "brand" : "Dell",
+            "price" : 4999.00,
+            "discountPrice" : 4699.00,
+            "specification" : ["Intel® Core™ i7-8700 Processor (12M Cache, up to 4.60GHz)", 
+                "16GB Dual Channel DDR4 at 2666MHz (2X8GB)", 
+                "256GB PCIe SSD (Boot) + 1TB 7200RPM SATA 6Gb/s (Storage)",
+                "NVIDIA® GeForce® GT 1050Tiwith 4GB DDR5Graphics Memory", 
+                "Windows 10 Home (64bit) Single Language English",
+                 "1Yr Premium Support Plus:Onsite Service"],
+                
+            "delivery" : "3-6 days",
+            "imgProduct" : "https://ibb.co/kG5cq4v"
+        },
+        {
+            "name" : "Dell i5675-7806BLU-PUS Inspiron Gaming PC ",  
+            "brand" : "Dell",
+            "price" : 6580.00,
+            "discountPrice" : null,
+            "specification" : ["Intel Core i7 8700 (6-Core/12-Thread, 12MB Cache,4.6GHz with Intel Turbo Boost Technology)", 
+                "16GB Dual Channel DDR4 at 2666MHz (2X8GB)", 
+                "128 GB M.2 [SATA] (SSD) Boot + 2 TB 7200R PM SATA HDD 6Gb/s Storage, No Optical Drive",
+                "NVIDIA GTX 1060 Graphics Card", 
+                "Windows 10 Home (64bit) Single Language English",
+                 "1Yr Premium Support Plus:Onsite Service"],
+                
+            "delivery" : "15-20 days (shipping oversea)",
+            "imgProduct" : "https://ibb.co/Br44hq3"
+        }
+  ],
+
+  "accessories":[
+    {
+        "name" : "Dell SE2419H 24inch Full HD IPS LED Monitor",  
+        "brand" : "Dell",
+        "price" : 599.00,
+        "discountPrice" : 529.00,
+        "specification" : ["24inch FHD (1920x1080) 16:9 IPS at 60Hz", 
+            "Brightness 250 cd/m2 (typ)", 
+            "Response Time 5ms typical (gray to gray)",
+            "1x HDMI, 1 x VGA", 
+            "3 Years Dell Warranty"],
+            
+        "delivery" : "3-6 days",
+        "imgProduct" : "https://ibb.co/TRM35Mx"
+    },
+    {
+        "name" : "Dell P Series P2418D",  
+        "brand" : "Dell",
+        "price" : 980.00,
+        "discountPrice" : 1099.00,
+        "specification" : ["IPS (In-Plane Switching) Panel", 
+            "DisplayPort + HDMI Inputs", 
+            "2560 x 1440 Resolution",
+            "1000:1 Static Contrast Ratio", 
+            "3 Years Dell Warranty300 cd/m² Brightness",
+            "Built-In USB 3.0 Hub"],
+            
+        "delivery" : "3-6 days",
+        "imgProduct" : "https://ibb.co/rGLpZX3"
+    }
+  ]
+}
