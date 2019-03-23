@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import {Link} from 'react-router-dom';
 import {getPath , getTitle} from '../utils/routes-utils';
-import AnotherPage from './arrivals';
+import Arrivals from './arrivals';
 
 export interface Props {
     children? : JSX.Element
@@ -17,11 +17,11 @@ class Home extends Component{
     render(){
         return (
             <>
-                <Link to={getPath(AnotherPage)}>
+                <Link to={getPath(Arrivals)}>
                     <IonCard>
                         <IonCardHeader>
                             <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-                            <IonCardTitle>{getTitle(AnotherPage)}</IonCardTitle>
+                            <IonCardTitle>{getTitle(Arrivals)}</IonCardTitle>
                         </IonCardHeader>
 
                         <IonCardContent>
