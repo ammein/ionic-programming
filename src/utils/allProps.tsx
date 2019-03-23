@@ -42,3 +42,7 @@ export interface Accessories{
     delivery?: string,
     imgProduct?: string
 }
+
+export const space : any = {
+    marginTop : "20px"
+}

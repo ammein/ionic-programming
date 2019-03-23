@@ -1,8 +1,12 @@
 import React , { Component } from 'react';
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonList, IonListHeader, IonButtons } from '@ionic/react';
 import {Link} from 'react-router-dom';
 import {getPath , getTitle} from '../utils/routes-utils';
 import Arrivals from './arrivals';
+import Content from '../HOC/content';
+import ImgFirst from '../assets/img/bVv9T7sdQkadNMHM9SrK_DellPricingPoster_01.jpg';
+import ImgSecond from '../assets/img/dsQVBGUFSN2G4Y3Dl0yb_images.jpeg';
+import {space} from '../utils/allProps';
 
 export interface Props {
     children? : JSX.Element
@@ -15,56 +19,55 @@ class Home extends Component{
     }
 
     render(){
+        const style : any = {
+            fontSize : "20px"
+        }
+
+        const styleImg : any = {
+            display: "block",
+            width: "100%",
+            height: "auto",
+            marginLeft: "auto",
+            marginRight: "auto"
+        }
+
+        const center : any = {
+            margin : "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        }
+
         return (
             <>
-                <Link to={getPath(Arrivals)}>
-                    <IonCard>
-                        <IonCardHeader>
-                            <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-                            <IonCardTitle>{getTitle(Arrivals)}</IonCardTitle>
-                        </IonCardHeader>
-
-                        <IonCardContent>
-                            Keep close to Nature's heart... and break clear away, once in awhile,
-                            and climb a mountain or spend a week in the woods. Wash your spirit clean.
-          </IonCardContent>
-                    </IonCard>
-                </Link>
-
-                <IonCard>
-                    <IonItem>
-                        <IonIcon name="pin" slot="start" />
-                        <IonLabel>ion-item in a card, icon left, button right</IonLabel>
-                        <IonButton fill="outline" slot="end">View</IonButton>
-                    </IonItem>
-
-                    <IonCardContent>
-                        This is content, without any paragraph or header tags,
-                        within an ion-cardContent element.
-      </IonCardContent>
-                </IonCard>
-
-                <IonCard>
-                    <IonItem href="#" class="activated">
-                        <IonIcon name="wifi" slot="start" />
-                        <IonLabel>Card Link Item 1 .activated</IonLabel>
-                    </IonItem>
-
-                    <IonItem href="#">
-                        <IonIcon name="wine" slot="start" />
-                        <IonLabel>Card Link Item 2</IonLabel>
-                    </IonItem>
-
-                    <IonItem class="activated">
-                        <IonIcon name="warning" slot="start" />
-                        <IonLabel>Card Button Item 1 .activated</IonLabel>
-                    </IonItem>
-
-                    <IonItem>
-                        <IonIcon name="walk" slot="start" />
-                        <IonLabel>Card Button Item 2</IonLabel>
-                    </IonItem>
-                </IonCard>
+               <Content>
+                    <div>
+                        <img src={ImgFirst} style={styleImg}/>
+    </div>
+                        {/* <IonCard>
+                            <img src={ImgSecond} style={styleImg}/>
+                        </IonCard> */}
+                        <div style={space}></div>
+                        <div>
+                            <img src={ImgSecond} style={styleImg} />
+                        </div>
+                        <div style={space}></div>
+                        <div style={center}>
+                            <IonButtons>
+                                <Link to="">
+                                    <IonButton color="secondary" expand="block" fill="solid" size="large">
+                                        Laptops
+                                    </IonButton>
+                                </Link>
+                                <IonButton color="secondary" expand="block" fill="solid" size="large">
+                                    Desktops
+                                </IonButton>
+                                <IonButton color="secondary" expand="block" fill="solid" size="large">
+                                    Accessories
+                                </IonButton>
+                            </IonButtons>
+                        </div>
+               </Content>
             </>
         );
     }

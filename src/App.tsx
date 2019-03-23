@@ -3,14 +3,14 @@ import { IonApp } from '@ionic/react';
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 import Home from './pages/home';
-import Content from './HOC/content'
+import Content from './HOC/content';
+import RouteApp from './utils/routes';
+
 
 const App = () => (
       <div id="app">
         <IonApp>
-          <Content>
-            <Home></Home>
-          </Content>
+          <RouteApp />
         </IonApp>
       </div>
 );

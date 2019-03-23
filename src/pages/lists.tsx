@@ -15,7 +15,8 @@ type Props = {
 type State = {
     laptops : Laptops[],
     desktops : Desktops[],
-    accessories : Accessories[]
+    accessories : Accessories[],
+    filter? : string
 }
 
 class Lists extends Component<Props, State>{
@@ -26,6 +27,12 @@ class Lists extends Component<Props, State>{
             accessories : [...jsonProduct.accessories],
             desktops : [...jsonProduct.desktops]
         }
+    }
+
+    generatePriceFloat(props : any){
+        const price: any = props.price;
+
+        return parseFloat(price).toFixed(2);
     }
 
     generateToolbar(){
@@ -40,7 +47,7 @@ class Lists extends Component<Props, State>{
                     <img src={props.imgProduct} style={style}></img>
                     <IonCardHeader>
                         <IonCardSubtitle>{props.brand}</IonCardSubtitle>
-                        <IonCardSubtitle>RM {props.price}</IonCardSubtitle>
+                        <IonCardSubtitle>RM {this.generatePriceFloat(props.price)}</IonCardSubtitle>
                         <IonCardTitle>{props.name}</IonCardTitle>
                     </IonCardHeader>
 
@@ -49,6 +56,17 @@ class Lists extends Component<Props, State>{
                     </IonCardContent>
                 </IonCard>
             )
+        })
+    }
+
+    getList(state : string){
+        const currentState = this.state;
+
+        // updateFilter
+        this.setState((prevState , props)=>{
+            return {
+                filter: state
+            }
         })
     }
 

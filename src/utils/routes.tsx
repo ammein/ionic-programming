@@ -14,7 +14,7 @@ const MyRoutes : RoutesDef[] = [
     {
         title : "Home",
         path : "/",
-        component : App,
+        component : Home,
         exact : true,
         thumbnail: "https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg"
     },
