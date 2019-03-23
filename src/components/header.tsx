@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
-import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle , IonMenuButton, IonIcon, IonButton } from '@ionic/react';
+import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonMenuButton, IonIcon, IonButton, IonSegmentButton , IonSegment , IonLabel } from '@ionic/react';
 import Route , {MyRoutes} from '../utils/routes';
-import {Props} from '../utils/headerProps';
+import {Props} from '../utils/allProps';
 
 export interface State{
     title? : string
@@ -52,11 +52,18 @@ class Header extends Component<Props,State>{
                                     <IonButton>
                                         <IonIcon slot="icon-only" name="menu"></IonIcon>
                                     </IonButton>
-                                </IonMenuButton>}
-                            
+                                </IonMenuButton>}                    
                         </IonButtons>
                         <IonTitle>{this.state.title}</IonTitle>
                     </IonToolbar>
+                    {this.props.enableToolbar ? <IonSegment>
+                        <IonSegmentButton value="friends">
+                            <IonLabel>Friends</IonLabel>
+                        </IonSegmentButton>
+                        <IonSegmentButton value="enemies">
+                            <IonLabel>Enemies</IonLabel>
+                        </IonSegmentButton>
+                    </IonSegment> : null}
                 </IonHeader>
                 {this.props.children}
             </>

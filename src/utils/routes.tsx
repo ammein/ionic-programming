@@ -7,30 +7,28 @@ var history = require('history').createBrowserHistory;
 import {IonPage, IonSplitPane, IonRouterOutlet} from '@ionic/react';
 import Menu from '../components/menu';
 import Lists from '../pages/lists';
+import {RoutesDef} from './allProps';
 
-export interface RoutesDef {
-    title : string,
-    path : string,
-    component : React.ComponentProps<any>,
-    exact?: boolean
-}
 
 const MyRoutes : RoutesDef[] = [
     {
         title : "Home",
         path : "/",
         component : App,
-        exact : true
+        exact : true,
+        thumbnail: "https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg"
     },
     {
         title : "New Arrivals",
         path : "/arrivals",
-        component : Arrivals
+        component : Arrivals,
+        icon : "star"
     },
     {
-        title : "Cards",
-        path : "/cards",
-        component : Home
+        title : "Product Lists",
+        path : "/lists",
+        component : Lists,
+        icon : "list"
     },{
         title : "Arrivals",
         path : "/lists",

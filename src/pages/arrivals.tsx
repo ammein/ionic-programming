@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonList, IonItem, IonLabel } from '@ionic/react';
 import Content from '../HOC/content';
-import { Props } from '../utils/headerProps';
+import { Props } from '../utils/allProps';
 
 class Arrivals extends React.Component<Props , {}> {
 

@@ -1,7 +1,8 @@
 import React , { Component } from 'react';
-import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonMenuButton , IonMenuToggle, IonLabel } from '@ionic/react';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonMenuButton, IonMenuToggle, IonLabel, IonThumbnail, IonIcon } from '@ionic/react';
 import {MyRoutes} from '../utils/routes';
 import { Link, NavLink } from 'react-router-dom';
+import './menu.less';
 
 export type Props={
     children? : JSX.Element
@@ -27,8 +28,13 @@ class Menu extends Component<Props, State>{
             return (
                 <IonMenuToggle key={props.title} autoHide={false}>
                 {/* Use react-router-dom for better switching without href */}
-                    <NavLink to={props.path} activeClassName="selected">
+                    <NavLink to={props.path} activeClassName="activeLink">
                         <IonItem>
+                            {props.thumbnail ? <IonThumbnail slot="start">
+                                <img src={props.thumbnail} />
+                            </IonThumbnail> : null}
+                            {props.icon ? 
+                            <IonIcon slot="start" name={props.icon}></IonIcon> : null}
                             <IonLabel>
                                 {props.title}
                             </IonLabel>
