@@ -8,6 +8,7 @@ import {IonPage, IonSplitPane, IonRouterOutlet} from '@ionic/react';
 import Menu from '../components/menu';
 import Lists from '../pages/lists';
 import {RoutesDef} from './allProps';
+import Account from '../pages/account';
 
 
 const MyRoutes : RoutesDef[] = [
@@ -33,10 +34,19 @@ const MyRoutes : RoutesDef[] = [
         title : "Arrivals",
         path : "/lists",
         component : Lists
+    },
+    {
+        title : "Account",
+        path : "/account",
+        component : Account
     }
 ]
 
 export { MyRoutes };
+
+export const Params = function({match} : any) : any{
+    return (<></>);
+}
 
 export type Props = {
     children? : JSX.Element
@@ -74,13 +84,13 @@ class Routes extends Component<Props, State>{
         }
     }
 
-    renderPath(){
+    renderPath() : any{
         return MyRoutes.map((props, index) => {
-            if(props.exact){
+            if (props.exact) {
                 return (
                     <Route exact key={index} path={props.path} component={props.component}></Route>
                 )
-            }else{
+            } else {
                 return (
                     <Route key={index} path={props.path} component={props.component}></Route>
                 )
@@ -103,6 +113,7 @@ class Routes extends Component<Props, State>{
                     <IonPage id="main">
                         <IonRouterOutlet>
                             {this.renderPath()}
+                            <Route path="/lists:id" component={Params}></Route>
                         </IonRouterOutlet>
                     </IonPage>
                 </IonSplitPane>

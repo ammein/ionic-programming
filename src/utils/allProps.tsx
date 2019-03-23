@@ -1,5 +1,5 @@
 export interface Props{
-    children?: JSX.Element | React.ReactNode,
+    children?: React.ReactNode | JSX.Element[],
     back?: boolean,
     currentPath?: string,
     toolbar? :any,

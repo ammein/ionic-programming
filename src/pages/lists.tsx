@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Content from '../HOC/content';
-import Home from '../pages/home';
 import {getPath} from '../utils/routes-utils';
 import Route, { MyRoutes } from '../utils/routes';
-import Arrivals from '../pages/arrivals';
 import jsonProduct from '../utils/json/product.json';
 import {Laptops , Accessories , Desktops} from '../utils/allProps';
 import { IonCard , IonCardHeader , IonCardSubtitle ,IonCardContent , IonCardTitle } from '@ionic/react';
+import AccountContext from '../context/accountContext';
 
 type Props = {
-    children? : JSX.Element
+    children? : JSX.Element,
+    filter? : string
 }
 
 type State = {
@@ -29,41 +29,39 @@ class Lists extends Component<Props, State>{
         }
     }
 
-    generatePriceFloat(props : any){
-        const price: any = props.price;
-
-        return parseFloat(price).toFixed(2);
-    }
-
-    generateToolbar(){
+    generateList(list : any) : any{
         const laptops = this.state.laptops;
+        const desktops = this.state.desktops;
+        const accessories = this.state.accessories;
+        const all : any = {...this.state};
         const style: any = {
-            height: "50%",
-
+            height: "50%"
         }
-        return laptops.map((props , index)=>{
-            return (
-                <IonCard key={index}>
-                    <img src={props.imgProduct} style={style}></img>
-                    <IonCardHeader>
-                        <IonCardSubtitle>{props.brand}</IonCardSubtitle>
-                        <IonCardSubtitle>RM {this.generatePriceFloat(props.price)}</IonCardSubtitle>
-                        <IonCardTitle>{props.name}</IonCardTitle>
-                    </IonCardHeader>
+        for(var property in all){
+            if(all.hasOwnProperty(property)){
+                if(list === property){
+                    return (
+                        <IonCard key={property}>
+                            <img src={all[property].imgProduct} style={style}></img>
+                            <IonCardHeader>
+                                <IonCardSubtitle>{all[property].brand}</IonCardSubtitle>
+                                <IonCardSubtitle>RM {all[property].price}</IonCardSubtitle>
+                                <IonCardTitle>{all[property].name}</IonCardTitle>
+                            </IonCardHeader>
 
-                    <IonCardContent>
-                        {props.specification.join(" ")}
-                    </IonCardContent>
-                </IonCard>
-            )
-        })
+                            <IonCardContent>
+                                {all[property].specification}
+                            </IonCardContent>
+                        </IonCard>
+                    )
+                }
+            }
+        }
     }
 
     getList(state : string){
-        const currentState = this.state;
-
         // updateFilter
-        this.setState((prevState , props)=>{
+        return this.setState((prevState , props)=>{
             return {
                 filter: state
             }
@@ -72,13 +70,14 @@ class Lists extends Component<Props, State>{
 
     componentDidMount(){
         console.log(this.state);
+        console.log(this.context);
     }
 
     render(){
         return(
             <>
-                <Content back={true} currentPath={getPath(this.props)}>
-                    {this.generateToolbar()}
+                <Content back={true} currentPath={getPath(this.constructor)}>
+                        {this.generateList(this.props.filter)}
                 </Content>
             </>
         )

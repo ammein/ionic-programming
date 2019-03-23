@@ -6,16 +6,36 @@ import Arrivals from './arrivals';
 import Content from '../HOC/content';
 import ImgFirst from '../assets/img/bVv9T7sdQkadNMHM9SrK_DellPricingPoster_01.jpg';
 import ImgSecond from '../assets/img/dsQVBGUFSN2G4Y3Dl0yb_images.jpeg';
-import {space} from '../utils/allProps';
+import {space, RoutesDef} from '../utils/allProps';
+import Routes , {MyRoutes} from '../utils/routes';
+import Lists from './lists';
+import AccountContext , {MyAppConsumer} from '../context/accountContext';
 
 export interface Props {
     children? : JSX.Element
 }
 
-class Home extends Component{
+type State = {
+    render? : boolean,
+    type : React.ReactNode
+}
+
+class Home extends Component<Props , State>{
 
     constructor(props : Props){
         super(props);
+    }
+
+    clickHandler(event : MouseEvent | any){
+        if(event.currentTarget.textContent === "Laptops"){
+            return (
+                <Lists filter={event.currentTarget.textContent}></Lists>
+            )
+        }
+    }
+
+    renderList(){
+
     }
 
     render(){
@@ -41,12 +61,10 @@ class Home extends Component{
         return (
             <>
                <Content>
+                    <AccountContext>
                     <div>
                         <img src={ImgFirst} style={styleImg}/>
-    </div>
-                        {/* <IonCard>
-                            <img src={ImgSecond} style={styleImg}/>
-                        </IonCard> */}
+                    </div>
                         <div style={space}></div>
                         <div>
                             <img src={ImgSecond} style={styleImg} />
@@ -54,11 +72,9 @@ class Home extends Component{
                         <div style={space}></div>
                         <div style={center}>
                             <IonButtons>
-                                <Link to="">
-                                    <IonButton color="secondary" expand="block" fill="solid" size="large">
-                                        Laptops
-                                    </IonButton>
-                                </Link>
+                                <IonButton color="secondary" expand="block" fill="solid" size="large" onClick={(props : MouseEvent)=> this.clickHandler(props)}>
+                                    Laptops
+                                </IonButton>
                                 <IonButton color="secondary" expand="block" fill="solid" size="large">
                                     Desktops
                                 </IonButton>
@@ -67,6 +83,7 @@ class Home extends Component{
                                 </IonButton>
                             </IonButtons>
                         </div>
+                    </AccountContext>
                </Content>
             </>
         );

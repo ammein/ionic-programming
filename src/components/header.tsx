@@ -56,7 +56,7 @@ class Header extends Component<Props,State>{
                         </IonButtons>
                         <IonTitle>{this.state.title}</IonTitle>
                     </IonToolbar>
-                    {this.props.enableToolbar ? <IonSegment>
+                    {this.props.enableToolbar ? <IonSegment color="secondary">
                         <IonSegmentButton value="friends">
                             <IonLabel>Friends</IonLabel>
                         </IonSegmentButton>
@@ -65,7 +65,6 @@ class Header extends Component<Props,State>{
                         </IonSegmentButton>
                     </IonSegment> : null}
                 </IonHeader>
-                {this.props.children}
             </>
         )
     }
