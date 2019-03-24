@@ -1,5 +1,32 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Personal Amin's Note.
+
+These are the commands for generating android file
+```bash
+# Enable ionic intergrations
+ionic init "My React App" --type=custom
+ionic integrations enable capacitor
+
+# Add android or ios
+ionic capacitor add <android|ios>
+
+# Copy build folder to android build
+ionic capacitor copy
+
+# Generate resources and config.xml on root project
+ionic integrations enable cordova --add
+```
+
+After done with intergrations , copy `resources` -> `android`
+
+Found this article that can point out from react app to phonegap :
+
+[http://notes.webutvikling.org/porting-a-react-app-to-phonegap/](React App To Phonegap)
+
+And for running local file, I found this issue :
+[https://stackoverflow.com/a/54349038/9716958](Issue Running 'file://' Local file)
+
 ## Available Scripts
 
 In the project directory, you can run:

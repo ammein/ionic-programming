@@ -1,10 +1,11 @@
 import React, { Component, createRef, RefObject } from 'react';
 import Content from '../HOC/content';
-import { IonItem, IonLabel , IonInput , IonList, IonListHeader, IonButton } from '@ionic/react';
+import { IonItem, IonLabel , IonInput , IonList, IonListHeader, IonButton , IonToast , IonItemDivider } from '@ionic/react';
 import AccountContext, { MyAppConsumer , AppContextInterface } from '../context/accountContext';
 import { Props } from '../utils/allProps';
 
 interface State extends AppContextInterface{
+    showToast : boolean
 }
 
 class Account extends Component<Props, State>{
@@ -16,7 +17,8 @@ class Account extends Component<Props, State>{
     constructor(props: Props){
         super(props);
         this.state = {
-            name : ""
+            name : "",
+            showToast : false
         }
         this.handleSubmit= this.handleSubmit.bind(this);
         this.getName = this.getName.bind(this);
@@ -33,6 +35,12 @@ class Account extends Component<Props, State>{
 
     handleSubmit(e : Event | React.FormEvent){
         e.preventDefault();
+        const toast = this.state.showToast;
+        this.setState((prevState , props)=>{
+            return {
+                showToast : !toast
+            }
+        })
     }
 
     componentDidMount(){
@@ -55,6 +63,18 @@ class Account extends Component<Props, State>{
 
         return(
             <Content>
+                <IonToast
+                    isOpen={this.state.showToast}
+                    onDidDismiss={() => this.setState(() => ({ showToast: false }))}
+                    style={{
+                        fontSize : "20px"
+                    }}
+                    message='Account Saved'
+                    closeButtonText="Okay"
+                    showCloseButton={true}
+                    duration={1000}
+                >
+                </IonToast>
                     <IonList>
                         <IonListHeader>
                             <IonLabel style={styleHeaderList}>
@@ -64,9 +84,10 @@ class Account extends Component<Props, State>{
                         <div style={{
                             marginTop : "50px"
                         }}></div>
-                        <IonListHeader>
-                            <IonLabel style={styleHeaderList}>Edit Account</IonLabel>
-                        </IonListHeader>
+                        <IonItemDivider></IonItemDivider>
+                            <IonListHeader>
+                                <IonLabel style={styleHeaderList}>Edit Account</IonLabel>
+                            </IonListHeader>
                         <div style={{marginTop : "20px"}}></div>
                         <form onSubmit={this.handleSubmit}>
                             <IonItem>

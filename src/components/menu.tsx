@@ -39,7 +39,7 @@ class Menu extends Component<Props, State>{
             return (
                 <IonMenuToggle key={props.title} autoHide={false}>
                 {/* Use react-router-dom for better switching without href */}
-                    <NavLink to={props.path} activeClassName="activeLink">
+                    <Link to={props.path}>
                         <IonItem onClick={props.path === "/lists" ? ((event: MouseEvent) => this.resetList(event,this.context)) : (()=>"")}>
                             {props.thumbnail ? <IonThumbnail slot="start">
                                 <img src={props.thumbnail} />
@@ -50,7 +50,7 @@ class Menu extends Component<Props, State>{
                                 {props.title}
                             </IonLabel>
                         </IonItem>
-                    </NavLink>
+                    </Link>
                 </IonMenuToggle>
             )
         })

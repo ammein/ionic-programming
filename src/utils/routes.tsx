@@ -1,5 +1,5 @@
 import React , {Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route , Switch } from 'react-router-dom';
 import App from '../App';
 import Arrivals from '../pages/arrivals';
 import Home from '../pages/home';
@@ -23,7 +23,8 @@ const MyRoutes : RoutesDef[] = [
         title : "New Arrivals",
         path : "/arrivals",
         component : Arrivals,
-        icon : "star"
+        icon : "star",
+        menu : false
     },
     {
         title : "Product Lists",
@@ -39,7 +40,8 @@ const MyRoutes : RoutesDef[] = [
     {
         title : "Account",
         path : "/account",
-        component : Account
+        component : Account,
+        icon : "Contact"
     }
 ]
 
@@ -102,9 +104,9 @@ class Routes extends Component<Props, State>{
 
     render(){
         return (
-                <Router>
-                    {/* For Render List */}
-                    <IonSplitPane contentId="main">
+            <Router>
+                {/* For Render List */}
+                <IonSplitPane contentId="main">
                     <Menu/>
                     {/* For Render Page with Route */}
                     {/* Must use id="main" for let it main content */}
@@ -115,7 +117,7 @@ class Routes extends Component<Props, State>{
                         </IonRouterOutlet>
                     </IonPage>
                 </IonSplitPane>
-                </Router>
+            </Router>
         )
     }
 }
