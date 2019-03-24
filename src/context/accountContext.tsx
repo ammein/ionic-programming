@@ -5,41 +5,39 @@ export interface AppContextInterface {
     cart? : any[]
     url?: string,
     updateValue?: any,
-    state?: object
+    chooseList?: string
 }
 
 interface State {
     name?: string,
     cart?: any[]
     url?: string,
-    updateValue?: any,
-    state? : object
+    updateValue?: any
 }
 
-export const MyAppConsumer = React.createContext<AppContextInterface | null>({
-    name : "Amin"
-});
+const myInitialState = {
+    name: "",
+    cart: [],
+    url: "",
+    chooseList : ""
+}
+
+export const MyAppConsumer = React.createContext<AppContextInterface | null>(myInitialState);
 
 class MyApp extends Component<any , State> {
 
     constructor(props : any) {
         super(props);
+        this.state = myInitialState;
     }
 
-    readonly state = {
-        name: "",
-        cart: [],
-        url: "",
-        state : {}
-    };
+    componentWillMount(){
 
-    updateValue = (key : any, val : any) : any =>{
-        debugger;
-        return this.setState({ [key]: val });
     }
+
     render() {
         return (
-            <MyAppConsumer.Provider value={{state : this.state ,updateValue : this.updateValue}}>
+            <MyAppConsumer.Provider value={myInitialState}>
                 {this.props.children}
             </MyAppConsumer.Provider>
         )

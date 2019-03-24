@@ -11,7 +11,7 @@ class Account extends Component<Props, State>{
 
     static contextType = MyAppConsumer;
 
-    private inputElement : any = createRef<HTMLIonInputElement>();
+    private buttonElement : React.RefObject<HTMLIonButtonElement> | any;
 
     constructor(props: Props){
         super(props);
@@ -20,6 +20,7 @@ class Account extends Component<Props, State>{
         }
         this.handleSubmit= this.handleSubmit.bind(this);
         this.getName = this.getName.bind(this);
+        this.buttonElement = createRef();
     }
 
     getName(event : any) : any{
@@ -30,16 +31,20 @@ class Account extends Component<Props, State>{
         })
     }
 
-    handleSubmit(e : React.FormEvent){
+    handleSubmit(e : Event | React.FormEvent){
         e.preventDefault();
-        debugger;
-        // this.context.updateValue("name" , this.state.name);
     }
 
     componentDidMount(){
-        if (this.context.name) {
-            this.inputElement.current.value = this.context.name;
+        const myContext = this.context;
+        if(myContext.name.length > 1){
+            document.querySelector<HTMLInputElement | any>("input[name='fullName']").value = this.context.name
         }
+        this.buttonElement.current.onclick = function(){
+            if (myContext.name !== undefined) {
+                myContext.name = document.querySelector<HTMLInputElement | any>("input[name='fullName']").value;
+            }
+        } 
     }
 
     render(){
@@ -52,21 +57,31 @@ class Account extends Component<Props, State>{
             <Content>
                     <IonList>
                         <IonListHeader>
-                            <IonLabel style={styleHeaderList}>Create Your Account</IonLabel>
+                            <IonLabel style={styleHeaderList}>
+                                Your Cart (Total {this.context.cart.length})
+                            </IonLabel>
+                        </IonListHeader>
+                        <div style={{
+                            marginTop : "50px"
+                        }}></div>
+                        <IonListHeader>
+                            <IonLabel style={styleHeaderList}>Edit Account</IonLabel>
                         </IonListHeader>
                         <div style={{marginTop : "20px"}}></div>
                         <form onSubmit={this.handleSubmit}>
                             <IonItem>
                                 <IonLabel position="floating">Full Name</IonLabel>
-                                <IonInput placeholder="Your Full Name" name="fullName" onIonChange={this.getName} ref={this.inputElement}></IonInput>
+                            <IonInput placeholder="Your Full Name" name="fullName" onIonChange={this.getName}></IonInput>
                             </IonItem>
-                            <IonButton expand="full" slot="end" style={{
+                            <IonButton 
+                            expand="full" 
+                            slot="end" 
+                            style={{
                                 bottom: "0"
-                            }} type="submit">Submit</IonButton>
+                            }} 
+                            onClick={((event: Event) => this.handleSubmit(event))} 
+                            ref={this.buttonElement}>Submit</IonButton>
                         </form>
-                    <MyAppConsumer.Consumer>
-                        {context => <div>context</div>}
-                    </MyAppConsumer.Consumer>
                     </IonList>
             </Content>
         )

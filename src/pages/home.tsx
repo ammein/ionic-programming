@@ -10,6 +10,7 @@ import {space, RoutesDef} from '../utils/allProps';
 import Routes , {MyRoutes} from '../utils/routes';
 import Lists from './lists';
 import AccountContext , {MyAppConsumer} from '../context/accountContext';
+import Account from './account';
 
 export interface Props {
     children? : JSX.Element
@@ -22,15 +23,22 @@ type State = {
 
 class Home extends Component<Props , State>{
 
+    static contextType = MyAppConsumer;
+
     constructor(props : Props){
         super(props);
     }
 
     clickHandler(event : MouseEvent | any){
+        const myContext : any = this.context;
         if(event.currentTarget.textContent === "Laptops"){
-            return (
-                <Lists filter={event.currentTarget.textContent}></Lists>
-            )
+            myContext.chooseList = "laptops";
+        }
+        if(event.currentTarget.textContent === "Desktops"){
+            myContext.chooseList = "desktops";
+        }
+        if(event.currentTarget.textContent === "Accessories"){
+            myContext.chooseList = "accessories";
         }
     }
 
@@ -61,7 +69,6 @@ class Home extends Component<Props , State>{
         return (
             <>
                <Content>
-                    <AccountContext>
                     <div>
                         <img src={ImgFirst} style={styleImg}/>
                     </div>
@@ -72,18 +79,23 @@ class Home extends Component<Props , State>{
                         <div style={space}></div>
                         <div style={center}>
                             <IonButtons>
-                                <IonButton color="secondary" expand="block" fill="solid" size="large" onClick={(props : MouseEvent)=> this.clickHandler(props)}>
-                                    Laptops
-                                </IonButton>
-                                <IonButton color="secondary" expand="block" fill="solid" size="large">
-                                    Desktops
-                                </IonButton>
-                                <IonButton color="secondary" expand="block" fill="solid" size="large">
-                                    Accessories
-                                </IonButton>
+                                <Link to="/lists">
+                                    <IonButton color="secondary" expand="block" fill="solid" size="large" onClick={(props : MouseEvent)=> this.clickHandler(props)}>
+                                        Laptops
+                                    </IonButton>
+                                </Link>
+                                <Link to="/lists">
+                                    <IonButton color="secondary" expand="block" fill="solid" size="large" onClick={(props: MouseEvent) => this.clickHandler(props)}>
+                                        Desktops
+                                    </IonButton>
+                                </Link>
+                            <Link to="/lists">
+                                <IonButton color="secondary" expand="block" fill="solid" size="large" onClick={(props: MouseEvent) => this.clickHandler(props)}>
+                                        Accessories
+                                    </IonButton>
+                            </Link>
                             </IonButtons>
                         </div>
-                    </AccountContext>
                </Content>
             </>
         );

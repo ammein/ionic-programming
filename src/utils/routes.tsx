@@ -33,7 +33,8 @@ const MyRoutes : RoutesDef[] = [
     },{
         title : "Arrivals",
         path : "/lists",
-        component : Lists
+        component : Lists,
+        menu : false
     },
     {
         title : "Account",
@@ -85,6 +86,7 @@ class Routes extends Component<Props, State>{
     }
 
     renderPath() : any{
+
         return MyRoutes.map((props, index) => {
             if (props.exact) {
                 return (
@@ -96,10 +98,6 @@ class Routes extends Component<Props, State>{
                 )
             }
         });
-    }
-
-    generateList(){
-
     }
 
     render(){

@@ -3,6 +3,7 @@ import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem,
 import {MyRoutes} from '../utils/routes';
 import { Link, NavLink } from 'react-router-dom';
 import './menu.less';
+import { MyAppConsumer } from '../context/accountContext';
 
 export type Props={
     children? : JSX.Element
@@ -14,6 +15,8 @@ export type State ={
 
 class Menu extends Component<Props, State>{
 
+    static contextType = MyAppConsumer;
+
     constructor(props : Props){
         super(props);
         this.state = {
@@ -21,15 +24,23 @@ class Menu extends Component<Props, State>{
         }
     }
 
+    resetList(e : MouseEvent , context : any){
+        context.chooseList = undefined;
+    }
+
     generateMenu(){
         const allRoutes = [...this.state.allRoutes];
 
-        return allRoutes.map((props, index) =>{
+        const filterRoutes: any[] = allRoutes.filter((value, index) => {
+            return value.menu === undefined;
+        })
+
+        return filterRoutes.map((props, index) =>{
             return (
                 <IonMenuToggle key={props.title} autoHide={false}>
                 {/* Use react-router-dom for better switching without href */}
                     <NavLink to={props.path} activeClassName="activeLink">
-                        <IonItem>
+                        <IonItem onClick={props.path === "/lists" ? ((event: MouseEvent) => this.resetList(event,this.context)) : (()=>"")}>
                             {props.thumbnail ? <IonThumbnail slot="start">
                                 <img src={props.thumbnail} />
                             </IonThumbnail> : null}

@@ -17,15 +17,18 @@ class Content extends Component<Props>{
 
     componentDidMount(){
         console.log(this.context)
+        this.context.url = this.props.currentPath;
     }
 
     render(){
         return (
             <>
-                <Header back={this.props.back} currentPath={this.props.currentPath} enableToolbar={this.props.enableToolbar} />
-                <IonContent scrollEvents={true} fullscreen={true}>
-                    {this.props.children}
-                </IonContent>
+                <AccountContext>
+                    <Header back={this.props.back} currentPath={this.props.currentPath} enableToolbar={this.props.enableToolbar} />
+                    <IonContent scrollEvents={true} fullscreen={true}>
+                        {this.props.children}
+                    </IonContent>
+                </AccountContext>
             </>
         )
     }

@@ -13,7 +13,8 @@ export interface RoutesDef {
     component: React.ComponentProps<any>,
     exact?: boolean,
     thumbnail? : string,
-    icon?: string
+    icon?: string,
+    menu? : boolean
 }
 
 export interface Laptops{

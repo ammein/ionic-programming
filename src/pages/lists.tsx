@@ -5,7 +5,7 @@ import Route, { MyRoutes } from '../utils/routes';
 import jsonProduct from '../utils/json/product.json';
 import {Laptops , Accessories , Desktops} from '../utils/allProps';
 import { IonCard , IonCardHeader , IonCardSubtitle ,IonCardContent , IonCardTitle } from '@ionic/react';
-import AccountContext from '../context/accountContext';
+import AccountContext, { MyAppConsumer } from '../context/accountContext';
 
 type Props = {
     children? : JSX.Element,
@@ -20,6 +20,9 @@ type State = {
 }
 
 class Lists extends Component<Props, State>{
+
+    static contextType = MyAppConsumer;
+
     constructor(props : Props){
         super(props);
         this.state = {
@@ -33,28 +36,51 @@ class Lists extends Component<Props, State>{
         const laptops = this.state.laptops;
         const desktops = this.state.desktops;
         const accessories = this.state.accessories;
-        const all : any = {...this.state};
+        const reindex : any = {...this.state};
+        const all : any = [...laptops , ...desktops , ...accessories];
         const style: any = {
             height: "50%"
         }
-        for(var property in all){
-            if(all.hasOwnProperty(property)){
-                if(list === property){
-                    return (
-                        <IonCard key={property}>
-                            <img src={all[property].imgProduct} style={style}></img>
-                            <IonCardHeader>
-                                <IonCardSubtitle>{all[property].brand}</IonCardSubtitle>
-                                <IonCardSubtitle>RM {all[property].price}</IonCardSubtitle>
-                                <IonCardTitle>{all[property].name}</IonCardTitle>
-                            </IonCardHeader>
+        if(
+            (list === undefined) || 
+            (list === "")
+            ){
+            return all.map((props : any, index : any) =>{
+                return (
+                    <IonCard key={index}>
+                        <img src={props.imgProduct} style={style}></img>
+                        <IonCardHeader>
+                            <IonCardSubtitle>{props.brand}</IonCardSubtitle>
+                            <IonCardSubtitle>RM {props.price}</IonCardSubtitle>
+                            <IonCardTitle>{props.name}</IonCardTitle>
+                        </IonCardHeader>
 
-                            <IonCardContent>
-                                {all[property].specification}
-                            </IonCardContent>
-                        </IonCard>
-                    )
-                }
+                        <IonCardContent>
+                            {props.specification}
+                        </IonCardContent>
+                    </IonCard>
+                )
+            })
+        }else{
+            for (var property in reindex) {
+                if (reindex.hasOwnProperty(property) && property === list) {
+                    return reindex[property].map((props : any , index : any) => {
+                        return (
+                            <IonCard key={index}>
+                                <img src={props.imgProduct} style={style}></img>
+                                <IonCardHeader>
+                                    <IonCardSubtitle>{props.brand}</IonCardSubtitle>
+                                    <IonCardSubtitle>RM {props.price}</IonCardSubtitle>
+                                    <IonCardTitle>{props.name}</IonCardTitle>
+                                </IonCardHeader>
+
+                                <IonCardContent>
+                                    {props.specification}
+                                </IonCardContent>
+                            </IonCard>
+                        )
+                    })
+                }          
             }
         }
     }
@@ -77,7 +103,7 @@ class Lists extends Component<Props, State>{
         return(
             <>
                 <Content back={true} currentPath={getPath(this.constructor)}>
-                        {this.generateList(this.props.filter)}
+                        {this.generateList(this.context.chooseList)}
                 </Content>
             </>
         )
