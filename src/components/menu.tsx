@@ -4,6 +4,7 @@ import {MyRoutes} from '../utils/routes';
 import { Link, NavLink } from 'react-router-dom';
 import './menu.less';
 import { MyAppConsumer } from '../context/accountContext';
+import {icon} from '../utils/allProps';
 
 export type Props={
     children? : JSX.Element
@@ -45,7 +46,7 @@ class Menu extends Component<Props, State>{
                                 <img src={props.thumbnail} />
                             </IonThumbnail> : null}
                             {props.icon ? 
-                            <IonIcon slot="start" name={props.icon}></IonIcon> : null}
+                                <img src={props.icon} style={icon}/> : null}
                             <IonLabel>
                                 {props.title}
                             </IonLabel>

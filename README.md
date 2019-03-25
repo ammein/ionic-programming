@@ -40,7 +40,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### Production Guide
+# Production Guide (Build Android File for Android Studio/XCode)
 
 These are the commands for generating android file
 ```bash
@@ -56,36 +56,36 @@ ionic capacitor copy
 
 # Generate resources and config.xml on root project
 ionic integrations enable cordova --add
+
+# Run on Android Studio or XCode
 ```
-
-After done with intergrations , copy `resources` -> `android`
-
-Found this article that can point out from react app to phonegap :
-
-[http://notes.webutvikling.org/porting-a-react-app-to-phonegap/](React App To Phonegap)
-
-And for running local file, I found this issue :
-[https://stackoverflow.com/a/54349038/9716958](Issue Running 'file://' Local file)
-
 ---
-## Other Solution Using Cordova Command Line
-## Installation
+# Production Guide PhoneGap
+```bash
+# Install the Create React App CLI.
 
-Install the Create React App CLI.
+npm install -g create-react-app
 
-`npm install -g create-react-app`
+# Install the Cordova CLI.
 
-Install the Cordova CLI.
+npm install -g cordova
 
-`npm install -g cordova`
+# Create the project.
 
-Create the project.
+create-react-app tutorial --typsescript
 
-`create-react-app tutorial`
+# Install Ionic and dependencies
+npm install --save typescript @types/node @types/react @types/react-dom @types/jest @ionic/core @ionic/react
 
-Because we will be editing the Webpack configuration, go to your Create React App project directory and run:
+# or
 
-`yarn run eject`
+yarn add typescript @types/node @types/react @types/react-dom @types/jest @ionic/core @ionic/react
+
+# Because we will be editing the Webpack configuration, go to your Create React App project directory and run:
+
+yarn run eject
+
+```
 
 Go to your config/paths.js file and change
 
@@ -93,18 +93,28 @@ Go to your config/paths.js file and change
 
 Because your files will be served from `file://` add this line to your package.json (https://github.com/facebookincubator/create-react-app/issues/1094):
 
-`"homepage": "./"`
-
-This is specific to create-react-app. In other projects you would need to ensure your paths are not prepended with a /.
-
-Now we will need some files from a Cordova project.
-
-`cordova create tutorial com.example.tutorial Tutorial`
-
-Next copy the config.xml from your Cordova project to your Create React App project. The other files and directories in the Cordova project are not currently used in this tutorial but take note of them because you may make use of them as your project develops. For example, the `res` directory would be where you would place icons and splash screens.
-
-Next modify your index.js so it looks like:
+```json
+"homepage": "."
 ```
+
+
+## This is specific to create-react-app. In other projects you would need to ensure your paths are not prepended with a /.
+
+```bash
+# Now we will need some files from a Cordova project.
+# Tips : Install in your react root folder
+cordova create tutorial com.example.tutorial Tutorial
+
+# Go to Tutorial folder
+cd Tutorial
+
+# Install these basic plugins
+cordova plugin add cordova-plugin-ionic-webview cordova-plugin-battery-status cordova-plugin-media-capture cordova-plugin-camera cordova-plugin-contacts cordova-plugin-device-motion cordova-plugin-console cordova-plugin-device cordova-plugin-device-orientation cordova-plugin-dialogs cordova-plugin-file cordova-plugin-file-transfer cordova-plugin-geolocation cordova-plugin-globalization cordova-plugin-inappbrowser cordova-plugin-media cordova-plugin-network-information cordova-plugin-splashscreen cordova-plugin-statusbar cordova-plugin-vibration cordova-plugin-whitelist
+```
+The `res` directory would be where you would place icons and splash screens.
+
+Next modify your `index.js` so it looks like:
+```js
 const startApp = () => {
   ReactDOM.render(<App />, document.getElementById('root'));
   registerServiceWorker();
@@ -117,28 +127,59 @@ if(window.cordova) {
 }
 ```
 
-And add `<script type="text/javascript" src="cordova.js"></script>` to index.html. You may also want to add
-```
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+And add `<script type="text/javascript" src="cordova.js"></script>` to `index.html`. You may also want to add :
+```html
 <meta name="format-detection" content="telephone=no">
 <meta name="msapplication-tap-highlight" content="no">
 ```
 
 Now we can build our output to the www directory.
 
-`yarn run build`
+```bash
+yarn run build
+```
+
+Then Copy your `www` folder into `Tutorial/www`
 
 The rest of these instructions have files and changes that are not in the current repository due to the nature of the dependencies that have to be brought down. Also I didn't want to tie the tutorial down with specific versions of Android and iOS.
 
 To target platforms:
+```bash
+# Go to your created cordova project
+cd Tutorial
 
-`cordova platform add ios`
+# To add android platform phonegap config.xml
+cordova platform add ios
 
-`cordova platform add android`
+# To add ios platform phonegap config.xml
+cordova platform add android
+```
 
-You need to install SDKs for each platform that you wish to target. Read this to check what requirements need to be satisfied: https://cordova.apache.org/docs/en/latest/guide/cli/index.html#install-pre-requisites-for-building
-Generally you will probably have to install Android Studio, XCode, SDKs, emulators, build systems, etc.
+## Tips for Phonegap
 
+### SVG
+
+For SVG Image , you cannot load it via `file://` . Therefore , you need to use normal `<img src="/path/to/svg"/>`.
+
+### React Router
+For react router typescript , you need these `hashRouter` to make it run normally on `file://` . But first install history npm dependencies :
+
+```bash
+# Ofcourse , install the dependencies first
+npm i -S history
+```
+On Your Code :
+
+```tsx
+var hashHistory = require("history").createHashHistory;
+
+// Use hashHistory for phonegap app enable
+const createHashHistory = hashHistory();
+
+<Router history={createHashHistory}>
+ {/* Other Route here */}
+</Router>
+```
 ---
 
 ## Learn More

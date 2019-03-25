@@ -14,7 +14,7 @@ export interface RoutesDef {
     exact?: boolean,
     thumbnail? : string,
     icon?: string,
-    menu? : boolean
+    menu? : SVGAElement | any
 }
 
 export interface Laptops{
@@ -46,4 +46,9 @@ export interface Accessories{
 
 export const space : any = {
     marginTop : "20px"
+}
+
+export const icon : object = {
+    width : "25px",
+    margin : "15px"
 }

@@ -1,5 +1,6 @@
 import React , {Component } from 'react';
-import { BrowserRouter as Router, Route , Switch } from 'react-router-dom';
+import { Router, Route , Switch , BrowserRouter as Browser } from 'react-router-dom';
+var hashHistory = require("history").createHashHistory;
 import App from '../App';
 import Arrivals from '../pages/arrivals';
 import Home from '../pages/home';
@@ -9,6 +10,9 @@ import Menu from '../components/menu';
 import Lists from '../pages/lists';
 import {RoutesDef} from './allProps';
 import Account from '../pages/account';
+import StarSVG from '../assets/svg/_ionicons_svg_md-star.svg';
+import ListSVG from '../assets/svg/_ionicons_svg_md-list.svg';
+import ContactSVG from '../assets/svg/_ionicons_svg_md-contact.svg';
 
 
 const MyRoutes : RoutesDef[] = [
@@ -23,14 +27,14 @@ const MyRoutes : RoutesDef[] = [
         title : "New Arrivals",
         path : "/arrivals",
         component : Arrivals,
-        icon : "star",
+        icon: StarSVG,
         menu : false
     },
     {
         title : "Product Lists",
         path : "/lists",
         component : Lists,
-        icon : "list"
+        icon: ListSVG
     },{
         title : "Arrivals",
         path : "/lists",
@@ -41,7 +45,7 @@ const MyRoutes : RoutesDef[] = [
         title : "Account",
         path : "/account",
         component : Account,
-        icon : "Contact"
+        icon: ContactSVG
     }
 ]
 
@@ -60,6 +64,9 @@ export type State = {
 }
 
 const createBrowserHistory = history();
+
+// Use hashHistory for phonegap app enable
+const createHashHistory = hashHistory();
 
 class Routes extends Component<Props, State>{
 
@@ -104,7 +111,7 @@ class Routes extends Component<Props, State>{
 
     render(){
         return (
-            <Router>
+            <Router history={createHashHistory}>
                 {/* For Render List */}
                 <IonSplitPane contentId="main">
                     <Menu/>

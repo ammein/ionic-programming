@@ -2,6 +2,8 @@ import React , { Component } from 'react';
 import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonMenuButton, IonIcon, IonButton, IonSegmentButton , IonSegment , IonLabel } from '@ionic/react';
 import Route , {MyRoutes} from '../utils/routes';
 import {Props} from '../utils/allProps';
+import MenuSVG from '../assets/svg/_ionicons_svg_md-menu.svg';
+import {icon} from '../utils/allProps';
 
 export interface State{
     title? : string
@@ -19,7 +21,7 @@ class Header extends Component<Props,State>{
 
 
     componentDidMount(){
-        const title: string = window.location.pathname;
+        const title: string = (window.location.hash.length > 1) ? window.location.hash.replace("#" , "") : window.location.pathname;
         console.log(MyRoutes);
         for(var property in MyRoutes){
             if(MyRoutes.hasOwnProperty(property)){
@@ -46,11 +48,13 @@ class Header extends Component<Props,State>{
                         { this.props.back ?
                                     <IonBackButton 
                                         goBack={() => { }}
-                                        defaultHref={this.props.currentPath}>
+                                        defaultHref={this.props.currentPath}
+                                        text="Back"
+                                        icon="">
                                         </IonBackButton>: <IonMenuButton>
                                     {/* <button></button> */}
                                     <IonButton>
-                                        <IonIcon slot="icon-only" name="menu"></IonIcon>
+                                        <img src={MenuSVG} style={icon}/>
                                     </IonButton>
                                 </IonMenuButton>}                    
                         </IonButtons>

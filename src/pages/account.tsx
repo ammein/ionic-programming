@@ -5,6 +5,7 @@ import AccountContext, { MyAppConsumer , AppContextInterface } from '../context/
 import { Props } from '../utils/allProps';
 
 interface State extends AppContextInterface{
+    prevName? : string
     showToast : boolean
 }
 
@@ -29,25 +30,18 @@ class Account extends Component<Props, State>{
         e.preventDefault();
         const toast = this.state.showToast;
         var myContext = this.context;
-        // Update Name
-        if (myContext.name !== undefined) {
-            myContext.name = document.querySelector<HTMLInputElement | any>("input[name='fullName']").value;
-        }
         // Update State
-        this.setState((prevState , props)=>{
+        return this.setState((prevState , props)=>{
+            // Update Name
+            if (myContext.name !== undefined) {
+                myContext.name = document.querySelector<HTMLInputElement | any>("input[name='fullName']").value;
+            }
             return {
+                prevName : prevState.name,
                 name : myContext.name,
                 showToast: !toast
             }
         })
-    }
-
-    componentDidMount(){
-        const myContext = this.context;
-        // Put the value
-        if(myContext.name.length > 1){
-            return this.inputElement.current.value = this.context.name;
-        }
     }
 
     render(){
@@ -90,7 +84,7 @@ class Account extends Component<Props, State>{
                             <IonInput 
                             placeholder="Your Full Name" 
                             name="fullName"
-                            value={this.context.name.length > 1 ? this.context.name : ""}
+                            value={this.state.name !== undefined ? this.state.name : this.context.name}
                             id="fullName"
                             ref={this.inputElement}></IonInput>
                             </IonItem>

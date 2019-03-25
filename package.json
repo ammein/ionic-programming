@@ -73,7 +73,8 @@
     "webpack": "4.28.3",
     "webpack-dev-server": "3.1.14",
     "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3"
+    "workbox-webpack-plugin": "3.6.3",
+    "cordova-plugin-whitelist": "1"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -141,5 +142,10 @@
       "D:\\codes\\ionic-programming\\node_modules\\jest-watch-typeahead\\filename.js",
       "D:\\codes\\ionic-programming\\node_modules\\jest-watch-typeahead\\testname.js"
     ]
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    }
   }
 }
