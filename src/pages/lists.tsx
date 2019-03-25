@@ -87,7 +87,7 @@ class Lists extends Component<Props, State>{
 
     getList(state : string){
         // updateFilter
-        return this.setState((prevState , props)=>{
+        return this.setState((prevState : any , props : any)=>{
             return {
                 filter: state
             }

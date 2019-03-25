@@ -31,10 +31,6 @@ class MyApp extends Component<any , State> {
         this.state = myInitialState;
     }
 
-    componentWillMount(){
-
-    }
-
     render() {
         return (
             <MyAppConsumer.Provider value={myInitialState}>

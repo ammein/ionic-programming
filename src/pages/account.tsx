@@ -13,46 +13,41 @@ class Account extends Component<Props, State>{
     static contextType = MyAppConsumer;
 
     private buttonElement : React.RefObject<HTMLIonButtonElement> | any;
+    private inputElement : React.RefObject<HTMLIonInputElement> | any;
 
     constructor(props: Props){
         super(props);
         this.state = {
-            name : "",
             showToast : false
         }
         this.handleSubmit= this.handleSubmit.bind(this);
-        this.getName = this.getName.bind(this);
         this.buttonElement = createRef();
-    }
-
-    getName(event : any) : any{
-        return this.setState((prevState , props)=>{
-            return {
-                name : event.target.value
-            }
-        })
+        this.inputElement = createRef();
     }
 
     handleSubmit(e : Event | React.FormEvent){
         e.preventDefault();
         const toast = this.state.showToast;
+        var myContext = this.context;
+        // Update Name
+        if (myContext.name !== undefined) {
+            myContext.name = document.querySelector<HTMLInputElement | any>("input[name='fullName']").value;
+        }
+        // Update State
         this.setState((prevState , props)=>{
             return {
-                showToast : !toast
+                name : myContext.name,
+                showToast: !toast
             }
         })
     }
 
     componentDidMount(){
         const myContext = this.context;
+        // Put the value
         if(myContext.name.length > 1){
-            document.querySelector<HTMLInputElement | any>("input[name='fullName']").value = this.context.name
+            return this.inputElement.current.value = this.context.name;
         }
-        this.buttonElement.current.onclick = function(){
-            if (myContext.name !== undefined) {
-                myContext.name = document.querySelector<HTMLInputElement | any>("input[name='fullName']").value;
-            }
-        } 
     }
 
     render(){
@@ -92,7 +87,12 @@ class Account extends Component<Props, State>{
                         <form onSubmit={this.handleSubmit}>
                             <IonItem>
                                 <IonLabel position="floating">Full Name</IonLabel>
-                            <IonInput placeholder="Your Full Name" name="fullName" onIonChange={this.getName}></IonInput>
+                            <IonInput 
+                            placeholder="Your Full Name" 
+                            name="fullName"
+                            value={this.context.name.length > 1 ? this.context.name : ""}
+                            id="fullName"
+                            ref={this.inputElement}></IonInput>
                             </IonItem>
                             <IonButton 
                             expand="full" 
