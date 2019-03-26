@@ -116,7 +116,7 @@ cordova create tutorial com.example.tutorial Tutorial
 cd Tutorial
 
 # Install these basic plugins
-cordova plugin add cordova-plugin-ionic-webview cordova-plugin-battery-status cordova-plugin-media-capture cordova-plugin-camera cordova-plugin-contacts cordova-plugin-device-motion cordova-plugin-console cordova-plugin-device cordova-plugin-device-orientation cordova-plugin-dialogs cordova-plugin-file cordova-plugin-file-transfer cordova-plugin-geolocation cordova-plugin-globalization cordova-plugin-inappbrowser cordova-plugin-media cordova-plugin-network-information cordova-plugin-splashscreen cordova-plugin-statusbar cordova-plugin-vibration cordova-plugin-whitelist
+cordova plugin add cordova-plugin-media-capture cordova-plugin-contacts cordova-plugin-device-motion cordova-plugin-device cordova-plugin-device-orientation cordova-plugin-dialogs cordova-plugin-file cordova-plugin-geolocation cordova-plugin-globalization cordova-plugin-inappbrowser cordova-plugin-media cordova-plugin-network-information cordova-plugin-splashscreen cordova-plugin-statusbar cordova-plugin-whitelist
 ```
 > NOTE : The `res` directory would be where you would place icons and splash screens.
 
@@ -187,6 +187,17 @@ cordova platform add ios
 # To add ios platform phonegap config.xml
 cordova platform add android
 ```
+
+## Bug Problem app not loading properly when install.
+
+Add this in your config.xml :
+
+```xml
+<!-- Bug found on apps loading crashed -->
+<preference name="loadUrlTimeoutValue" value="700000" />
+```
+
+---
 
 ## Tips for Phonegap
 

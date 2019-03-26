@@ -15,6 +15,14 @@ const startApp = () =>{
 
 if (window.cordova) {
     document.addEventListener('deviceready', startApp, false);
+
+    document.addEventListener('deviceready' , function(){
+        navigator.splashscreen.show();
+
+        setTimeout(function () {
+            navigator.splashscreen.hide();
+        }, 5000);
+    },false);
 } else {
     startApp();
 }
@@ -22,5 +30,8 @@ if (window.cordova) {
 declare global{
     interface Window {
         cordova : any
+    }
+    interface Navigator{
+        splashscreen: any
     }
 }
