@@ -1,7 +1,6 @@
 import React , {Component } from 'react';
 import { Router, Route , Switch , BrowserRouter as Browser } from 'react-router-dom';
 var hashHistory = require("history").createHashHistory;
-import App from '../App';
 import Arrivals from '../pages/arrivals';
 import Home from '../pages/home';
 var history = require('history').createBrowserHistory;
