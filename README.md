@@ -158,7 +158,7 @@ And add these to `index.html` :
 <script type="text/javascript" src="cordova.js"></script>
 ```
 
-Now we can build our output to the www directory.
+Now we can build our output to the `www` directory.
 
 ```bash
 yarn run build
