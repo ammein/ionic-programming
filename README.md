@@ -190,10 +190,12 @@ For react router typescript , you need these `hashRouter` to make it run normall
 ```bash
 # Ofcourse , install the dependencies first
 npm i -S history
+npm i -S react-router-dom
 ```
 On Your Code :
 
 ```tsx
+import { Router } from 'react-router-dom';
 var hashHistory = require("history").createHashHistory;
 
 // Use hashHistory for phonegap app enable
