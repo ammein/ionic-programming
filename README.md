@@ -91,7 +91,9 @@ Go to your `config/paths.js` file and change :
 
 `appBuild: resolveApp('build')` to `appBuild: resolveApp('www')`
 
-> Because your files will be served from `file://` add this line to your `package.json` (https://github.com/facebookincubator/create-react-app/issues/1094):
+> Because your files will be served from `file://` (https://github.com/facebookincubator/create-react-app/issues/1094)
+
+Add this line to your `package.json` :
 
 ```json
 "homepage": "."
