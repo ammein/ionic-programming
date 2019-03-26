@@ -150,10 +150,12 @@ declare global{
 }
 ```
 
-And add `<script type="text/javascript" src="cordova.js"></script>` to `index.html`. You may also want to add :
+And add these to `index.html` :
 ```html
 <meta name="format-detection" content="telephone=no">
 <meta name="msapplication-tap-highlight" content="no">
+
+<script type="text/javascript" src="cordova.js"></script>
 ```
 
 Now we can build our output to the www directory.
