@@ -40,7 +40,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-# Production Guide (Build Android File for Android Studio/XCode)
+# Production Guide (Build Android or iOS app builder for Android Studio or XCode)
 
 These are the commands for generating android file
 ```bash
@@ -58,6 +58,7 @@ ionic capacitor copy
 ionic integrations enable cordova --add
 
 # Run on Android Studio or XCode
+ionic capacitor open <android|ios>
 ```
 ---
 # Production Guide PhoneGap
@@ -84,21 +85,19 @@ yarn add typescript @types/node @types/react @types/react-dom @types/jest @ionic
 # Because we will be editing the Webpack configuration, go to your Create React App project directory and run:
 
 yarn run eject
-
 ```
 
 Go to your config/paths.js file and change
 
 `appBuild: resolveApp('build')` to `appBuild: resolveApp('www')`
 
-Because your files will be served from `file://` add this line to your package.json (https://github.com/facebookincubator/create-react-app/issues/1094):
+Because your files will be served from `file://` add this line to your `package.json` (https://github.com/facebookincubator/create-react-app/issues/1094):
 
 ```json
 "homepage": "."
 ```
 
-
-## This is specific to create-react-app. In other projects you would need to ensure your paths are not prepended with a /.
+> This is specific to create-react-app. In other projects you would need to ensure your paths are not prepended with a /.
 
 ```bash
 # Now we will need some files from a Cordova project.
