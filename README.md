@@ -101,8 +101,9 @@ Add this line to your `package.json` :
 
 > This is specific to create-react-app. In other projects you would need to ensure your paths are not prepended with a /.
 
+Now we will need some files from a Cordova project :
+
 ```bash
-# Now we will need some files from a Cordova project.
 # Tips : Install in your react root folder
 cordova create tutorial com.example.tutorial Tutorial
 
