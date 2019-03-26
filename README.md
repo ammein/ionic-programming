@@ -127,6 +127,30 @@ if(window.cordova) {
 }
 ```
 
+or in `index.tsx` Typescript format :
+```tsx
+const startApp = () =>{
+    ReactDOM.render(<App></App>, document.getElementById('root'));
+
+    // If you want your app to work offline and load faster, you can change
+    // unregister() to register() below. Note this comes with some pitfalls.
+    // Learn more about service workers: https://bit.ly/CRA-PWA
+    serviceWorker.register();
+}
+
+if (window.cordova) {
+    document.addEventListener('deviceready', startApp, false);
+} else {
+    startApp();
+}
+
+declare global{
+    interface Window {
+        cordova : any
+    }
+}
+```
+
 And add `<script type="text/javascript" src="cordova.js"></script>` to `index.html`. You may also want to add :
 ```html
 <meta name="format-detection" content="telephone=no">
