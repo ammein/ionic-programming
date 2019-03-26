@@ -44,6 +44,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 These are the commands for generating android file
 ```bash
+# Install ionic CLI. Refer : https://ionicframework.com/docs/cli
+npm install -g ionic
+
 # Enable ionic intergrations
 ionic init "My React App" --type=custom
 ionic integrations enable capacitor
