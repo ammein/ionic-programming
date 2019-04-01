@@ -2,5 +2,6 @@
   "appId": "io.ionic.starter",
   "appName": "My React App",
   "bundledWebRuntime": false,
-  "webDir": "build"
+  "webDir": "www",
+  "windowsAndroidStudioPath": "D:\\Android\\Android Studio\\bin\\studio64.exe"
 }
