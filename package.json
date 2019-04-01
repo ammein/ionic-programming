@@ -12,10 +12,10 @@
     "@ionic/react": "0.0.5",
     "@svgr/webpack": "4.1.0",
     "@types/jest": "^24.0.11",
-    "@types/node": "^11.11.6",
-    "@types/react": "^16.8.8",
+    "@types/node": "^11.12.2",
+    "@types/react": "^16.8.10",
     "@types/react-dom": "^16.8.3",
-    "@types/react-redux": "^7.0.5",
+    "@types/react-redux": "^7.0.6",
     "@types/react-router": "^4.4.5",
     "@types/react-router-dom": "^4.3.1",
     "android": "0.0.8",
@@ -64,10 +64,10 @@
     "postcss-preset-env": "6.5.0",
     "postcss-safe-parser": "4.0.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.4",
+    "react": "^16.8.6",
     "react-app-polyfill": "^0.2.2",
     "react-dev-utils": "^8.0.0",
-    "react-dom": "^16.8.4",
+    "react-dom": "^16.8.6",
     "react-redux": "^6.0.1",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
@@ -75,7 +75,7 @@
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.2",
-    "typescript": "^3.3.4000",
+    "typescript": "^3.4.1",
     "url-loader": "1.1.2",
     "webpack": "4.28.3",
     "webpack-dev-server": "3.1.14",
@@ -163,5 +163,5 @@
     "platforms": [
       "android"
     ]
-  },
+  }
 }

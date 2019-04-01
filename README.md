@@ -62,6 +62,9 @@ ionic capacitor copy
 # Generate resources and config.xml on root project
 ionic integrations enable cordova --add
 
+# Reload resources , make sure login ionic first by running
+ionic cordova resources
+
 # Run on Android Studio or XCode
 ionic capacitor open <android|ios>
 ```

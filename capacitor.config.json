@@ -3,5 +3,5 @@
   "appName": "My React App",
   "bundledWebRuntime": false,
   "webDir": "www",
-  "windowsAndroidStudioPath": "D:\\Android\\Android Studio\\bin\\studio64.exe"
+  "windowsAndroidStudioPath" : "D:\\Android\\Android Studio\\bin\\studio64.exe"
 }
