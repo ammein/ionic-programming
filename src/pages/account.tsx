@@ -75,8 +75,11 @@ class Account extends Component<Props, State>{
      * @param e Event Object
      * @param name String for Object Propert
      */
-    renderChange(e : Event | React.FormEvent<any> , name : string){
-        this.setState({ name : e.currentTarget.value})
+    renderChange(e : Event | React.FormEvent<any>){
+        var id = e.currentTarget.name;
+
+        // For dynamically update state based on target value
+        this.setState({ [id]: e.currentTarget.value } as Pick<State, keyof State>);
     }
 
     render(){
@@ -118,10 +121,10 @@ class Account extends Component<Props, State>{
                                 <IonLabel position="floating">Full Name</IonLabel>
                             <IonInput 
                             placeholder="Your Full Name"
-                            onIonChange={((event : any) => this.renderChange(event , "name"))} 
-                            name="fullName"
+                            onIonChange={((event : any) => this.renderChange(event))} 
+                            name="name"
                             value={this.state.name}
-                            id="fullName"
+                            id="name"
                             ref={this.inputElement}></IonInput>
                             </IonItem>
                             <IonButton 
