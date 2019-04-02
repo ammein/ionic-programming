@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonMenuButton, IonMenuToggle, IonLabel, IonThumbnail, IonIcon } from '@ionic/react';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonMenuButton, IonMenuToggle, IonLabel, IonThumbnail, IonIcon, IonRippleEffect } from '@ionic/react';
 import {MyRoutes} from '../utils/routes';
 import { Link, NavLink } from 'react-router-dom';
 import './menu.less';
@@ -41,12 +41,13 @@ class Menu extends Component<Props, State>{
                 <IonMenuToggle key={props.title} autoHide={false}>
                 {/* Use react-router-dom for better switching without href */}
                     <Link to={props.path}>
-                        <IonItem onClick={props.path === "/lists" ? ((event: MouseEvent) => this.resetList(event,this.context)) : (()=>"")}>
+                        <IonItem onClick={props.path === "/lists" ? ((event: MouseEvent) => this.resetList(event, this.context)) : (() => "")} class="ion-activatable">
+                            <IonRippleEffect type="unbounded"></IonRippleEffect>
                             {props.thumbnail ? <IonThumbnail slot="start">
                                 <img src={props.thumbnail} />
                             </IonThumbnail> : null}
                             {props.icon ? 
-                                <img src={props.icon} style={icon}/> : null}
+                                <IonIcon name={props.icon} slot="start"></IonIcon> : null}
                             <IonLabel>
                                 {props.title}
                             </IonLabel>

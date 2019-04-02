@@ -48,13 +48,12 @@ class Header extends Component<Props,State>{
                         { this.props.back ?
                                     <IonBackButton 
                                         goBack={() => { }}
-                                        defaultHref={this.props.currentPath}
-                                        text="Back"
-                                        icon="">
+                                        defaultHref={this.props.currentPath}>
                                         </IonBackButton>: <IonMenuButton>
                                     {/* <button></button> */}
                                     <IonButton>
-                                        <img src={MenuSVG} style={icon}/>
+                                        {/* <img src={MenuSVG} style={icon}/> */}
+                                        <IonIcon name="menu" slot="start"></IonIcon>
                                     </IonButton>
                                 </IonMenuButton>}                    
                         </IonButtons>

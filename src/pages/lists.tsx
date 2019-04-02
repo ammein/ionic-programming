@@ -4,7 +4,7 @@ import {getPath} from '../utils/routes-utils';
 import Route, { MyRoutes } from '../utils/routes';
 import jsonProduct from '../utils/json/product.json';
 import {Laptops , Accessories , Desktops} from '../utils/allProps';
-import { IonCard , IonCardHeader , IonCardSubtitle ,IonCardContent , IonCardTitle } from '@ionic/react';
+import { IonCard , IonCardHeader , IonCardSubtitle ,IonCardContent , IonCardTitle, IonRippleEffect } from '@ionic/react';
 import AccountContext, { MyAppConsumer } from '../context/accountContext';
 
 type Props = {
@@ -47,7 +47,8 @@ class Lists extends Component<Props, State>{
             ){
             return all.map((props : any, index : any) =>{
                 return (
-                    <IonCard key={index}>
+                    <IonCard key={index} class="ion-activatable">
+                        <IonRippleEffect type="unbounded"></IonRippleEffect>
                         <img src={props.imgProduct} style={style}></img>
                         <IonCardHeader>
                             <IonCardSubtitle>{props.brand}</IonCardSubtitle>
@@ -66,7 +67,8 @@ class Lists extends Component<Props, State>{
                 if (reindex.hasOwnProperty(property) && property === list) {
                     return reindex[property].map((props : any , index : any) => {
                         return (
-                            <IonCard key={index}>
+                            <IonCard key={index} class="ion-activatable">
+                                <IonRippleEffect type="unbounded"></IonRippleEffect>
                                 <img src={props.imgProduct} style={style}></img>
                                 <IonCardHeader>
                                     <IonCardSubtitle>{props.brand}</IonCardSubtitle>

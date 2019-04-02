@@ -26,14 +26,14 @@ const MyRoutes : RoutesDef[] = [
         title : "New Arrivals",
         path : "/arrivals",
         component : Arrivals,
-        icon: StarSVG,
+        icon: "star",
         menu : false
     },
     {
         title : "Product Lists",
         path : "/lists",
         component : Lists,
-        icon: ListSVG
+        icon: "list"
     },{
         title : "Arrivals",
         path : "/lists",
@@ -44,7 +44,7 @@ const MyRoutes : RoutesDef[] = [
         title : "Account",
         path : "/account",
         component : Account,
-        icon: ContactSVG
+        icon: "contact"
     }
 ]
 

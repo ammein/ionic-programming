@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonList, IonListHeader, IonButtons } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonList, IonListHeader, IonButtons, IonRippleEffect } from '@ionic/react';
 import {Link} from 'react-router-dom';
 import {getPath , getTitle} from '../utils/routes-utils';
 import Arrivals from './arrivals';
@@ -81,16 +81,19 @@ class Home extends Component<Props , State>{
                             <IonButtons>
                                 <Link to="/lists">
                                     <IonButton color="secondary" expand="block" fill="solid" size="large" onClick={(props : MouseEvent)=> this.clickHandler(props)}>
+                                        <IonRippleEffect></IonRippleEffect>
                                         Laptops
                                     </IonButton>
                                 </Link>
                                 <Link to="/lists">
                                     <IonButton color="secondary" expand="block" fill="solid" size="large" onClick={(props: MouseEvent) => this.clickHandler(props)}>
+                                    <IonRippleEffect></IonRippleEffect>
                                         Desktops
                                     </IonButton>
                                 </Link>
                             <Link to="/lists">
                                 <IonButton color="secondary" expand="block" fill="solid" size="large" onClick={(props: MouseEvent) => this.clickHandler(props)}>
+                                    <IonRippleEffect></IonRippleEffect>
                                         Accessories
                                     </IonButton>
                             </Link>

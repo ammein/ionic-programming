@@ -3,6 +3,7 @@ import Content from '../HOC/content';
 import { IonItem, IonLabel , IonInput , IonList, IonListHeader, IonButton , IonToast , IonItemDivider } from '@ionic/react';
 import AccountContext, { MyAppConsumer , AppContextInterface } from '../context/accountContext';
 import { Props } from '../utils/allProps';
+import { InputChangeEventDetail } from '@ionic/core';
 
 interface State extends AppContextInterface{
     prevName? : string
@@ -29,19 +30,53 @@ class Account extends Component<Props, State>{
     handleSubmit(e : Event | React.FormEvent){
         e.preventDefault();
         const toast = this.state.showToast;
-        var myContext = this.context;
+
+        this.context.name = this.state.name;
+
         // Update State
         return this.setState((prevState , props)=>{
-            // Update Name
-            if (myContext.name !== undefined) {
-                myContext.name = document.querySelector<HTMLInputElement | any>("input[name='fullName']").value;
-            }
             return {
                 prevName : prevState.name,
-                name : myContext.name,
+                name: this.state.name,
                 showToast: !toast
             }
         })
+    }
+
+    /**
+     * To update state based on previous State or context
+     * @param prevProps Previous Props
+     * @param prevState Previous States
+     */
+    getSnapshotBeforeUpdate(prevProps : any, prevState : any){
+        return {
+            name : (prevState.name) ? prevState.name : this.context.name
+        }
+    }
+
+    /**
+     * Must do conditional state if prevState.name is not the same as snapshot.name. Else, it will caused an infinite loop
+     * This is for update state from changing pages , if not current state will always empty
+     * Get snapshot data previously from getSnapshotBeforeUpdate
+     * @param prevProps 
+     * @param prevState 
+     * @param snapshot 
+     */
+    componentDidUpdate(prevProps : any, prevState : any, snapshot : any){
+        if(prevState.name !== snapshot.name){
+            this.setState({
+                name : snapshot.name
+            })
+        }
+    }
+
+    /**
+     * This is for input IonChange to update state regularly
+     * @param e Event Object
+     * @param name String for Object Propert
+     */
+    renderChange(e : Event | React.FormEvent<any> , name : string){
+        this.setState({ name : e.currentTarget.value})
     }
 
     render(){
@@ -82,9 +117,10 @@ class Account extends Component<Props, State>{
                             <IonItem>
                                 <IonLabel position="floating">Full Name</IonLabel>
                             <IonInput 
-                            placeholder="Your Full Name" 
+                            placeholder="Your Full Name"
+                            onIonChange={((event : any) => this.renderChange(event , "name"))} 
                             name="fullName"
-                            value={this.state.name !== undefined ? this.state.name : this.context.name}
+                            value={this.state.name}
                             id="fullName"
                             ref={this.inputElement}></IonInput>
                             </IonItem>
