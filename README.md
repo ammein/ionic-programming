@@ -68,6 +68,13 @@ ionic cordova resources
 # Run on Android Studio or XCode
 ionic capacitor open <android|ios>
 ```
+
+If you have Android Studio installed on different drive such as D: drive. You may insert this on `capactior.config.json`. This will execute when you running `ionic capacitor open <android|ios>` :
+```json
+{
+    "windowsAndroidStudioPath" : "D:\\Android\\Android Studio\\bin\\studio64.exe"
+}
+```
 ---
 # Production Guide PhoneGap
 ```bash
