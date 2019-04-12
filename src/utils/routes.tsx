@@ -9,9 +9,7 @@ import Menu from '../components/menu';
 import Lists from '../pages/lists';
 import {RoutesDef} from './allProps';
 import Account from '../pages/account';
-import StarSVG from '../assets/svg/_ionicons_svg_md-star.svg';
-import ListSVG from '../assets/svg/_ionicons_svg_md-list.svg';
-import ContactSVG from '../assets/svg/_ionicons_svg_md-contact.svg';
+import View from '../pages/view';
 
 
 const MyRoutes : RoutesDef[] = [
@@ -34,11 +32,6 @@ const MyRoutes : RoutesDef[] = [
         path : "/lists",
         component : Lists,
         icon: "list"
-    },{
-        title : "Arrivals",
-        path : "/lists",
-        component : Lists,
-        menu : false
     },
     {
         title : "Account",
@@ -119,7 +112,6 @@ class Routes extends Component<Props, State>{
                     <IonPage id="main">
                         <IonRouterOutlet>
                             {this.renderPath()}
-                            <Route path="/lists:id" component={Params}></Route>
                         </IonRouterOutlet>
                     </IonPage>
                 </IonSplitPane>

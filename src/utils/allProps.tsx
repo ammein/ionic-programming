@@ -1,9 +1,12 @@
 export interface Props{
-    children?: React.ReactNode | JSX.Element[],
+    children?: React.ReactNode | JSX.Element[] | JSX.Element,
     back?: boolean,
     currentPath?: string,
     toolbar? :any,
-    enableToolbar? : boolean
+    enableToolbar? : boolean,
+    match? :any,
+    location?:any,
+    history? : any
 }
 
 

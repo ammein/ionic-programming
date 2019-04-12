@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import Content from '../HOC/content';
 import {getPath} from '../utils/routes-utils';
-import Route, { MyRoutes } from '../utils/routes';
+import { Route,Link} from 'react-router-dom';
+import MyRoute, { MyRoutes } from '../utils/routes';
 import jsonProduct from '../utils/json/product.json';
 import {Laptops , Accessories , Desktops} from '../utils/allProps';
 import { IonCard , IonCardHeader , IonCardSubtitle ,IonCardContent , IonCardTitle, IonRippleEffect } from '@ionic/react';
 import AccountContext, { MyAppConsumer } from '../context/accountContext';
+import {Props} from '../utils/allProps';
+import View from '../pages/view';
 
-type Props = {
+interface MyProps extends Props {
     children? : JSX.Element,
-    filter? : string
+    filter? : string,
 }
 
 type State = {
@@ -19,11 +22,11 @@ type State = {
     filter? : string
 }
 
-class Lists extends Component<Props, State>{
+class Lists extends Component<MyProps, State>{
 
     static contextType = MyAppConsumer;
 
-    constructor(props : Props){
+    constructor(props: MyProps){
         super(props);
         this.state = {
             laptops: [...jsonProduct.laptops],
@@ -32,6 +35,10 @@ class Lists extends Component<Props, State>{
         }
     }
 
+    goToList(name : string)
+    {
+        this.props.history.push("/lists/"+name);
+    }
     generateList(list : any) : any{
         const laptops = this.state.laptops;
         const desktops = this.state.desktops;
@@ -47,7 +54,7 @@ class Lists extends Component<Props, State>{
             ){
             return all.map((props : any, index : any) =>{
                 return (
-                    <IonCard key={index} class="ion-activatable">
+                    <IonCard key={index} class="ion-activatable" onClick={((event : Event)=> this.goToList(props.name))}>
                         <IonRippleEffect type="unbounded"></IonRippleEffect>
                         <img src={props.imgProduct} style={style}></img>
                         <IonCardHeader>
@@ -67,7 +74,7 @@ class Lists extends Component<Props, State>{
                 if (reindex.hasOwnProperty(property) && property === list) {
                     return reindex[property].map((props : any , index : any) => {
                         return (
-                            <IonCard key={index} class="ion-activatable">
+                            <IonCard key={index} class="ion-activatable" onClick={((event : Event)=> this.goToList(props.name))}>
                                 <IonRippleEffect type="unbounded"></IonRippleEffect>
                                 <img src={props.imgProduct} style={style}></img>
                                 <IonCardHeader>
@@ -105,7 +112,9 @@ class Lists extends Component<Props, State>{
         return(
             <>
                 <Content back={true} currentPath={getPath(this.constructor)}>
-                        {this.generateList(this.context.chooseList)}
+                    {this.props.match.url === this.props.location.pathname ? this.generateList(this.context.chooseList) : null}
+                    {/* Nested Route here for match.id */}
+                    <Route path={`${this.props.match.url}/:id`} render={(props : any) => <View {...props}></View>}></Route>
                 </Content>
             </>
         )
