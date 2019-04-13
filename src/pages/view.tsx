@@ -1,7 +1,6 @@
 import React , {Component} from 'react';
 import {Props} from '../utils/allProps';
-import {AppContextInterface , MyAppConsumer} from '../context/accountContext'
-import Content from '../HOC/content';
+import {AppContextInterface , MyAppConsumer} from '../context/accountContext';
 import { throws } from 'assert';
 
 interface State extends AppContextInterface{
