@@ -9,6 +9,7 @@ import { IonCard , IonCardHeader , IonCardSubtitle ,IonCardContent , IonCardTitl
 import AccountContext, { MyAppConsumer } from '../context/accountContext';
 import {Props} from '../utils/allProps';
 import View from '../pages/view';
+import LazyLoad from 'react-lazyload';
 
 interface MyProps extends Props {
     children? : JSX.Element,
@@ -56,7 +57,9 @@ class Lists extends Component<MyProps, State>{
                 return (
                     <IonCard key={index} class="ion-activatable" onClick={((event : Event)=> this.goToList(props.name))}>
                         <IonRippleEffect type="unbounded"></IonRippleEffect>
-                        <img src={props.imgProduct} style={style}></img>
+                        <LazyLoad height={200}>
+                            <img src={props.imgProduct} style={style}></img>
+                        </LazyLoad>
                         <IonCardHeader>
                             <IonCardSubtitle>{props.brand}</IonCardSubtitle>
                             <IonCardSubtitle>RM {props.price}</IonCardSubtitle>
@@ -76,7 +79,9 @@ class Lists extends Component<MyProps, State>{
                         return (
                             <IonCard key={index} class="ion-activatable" onClick={((event : Event)=> this.goToList(props.name))}>
                                 <IonRippleEffect type="unbounded"></IonRippleEffect>
-                                <img src={props.imgProduct} style={style}></img>
+                                <LazyLoad height={200}>
+                                    <img src={props.imgProduct} style={style}></img>
+                                </LazyLoad>
                                 <IonCardHeader>
                                     <IonCardSubtitle>{props.brand}</IonCardSubtitle>
                                     <IonCardSubtitle>RM {props.price}</IonCardSubtitle>

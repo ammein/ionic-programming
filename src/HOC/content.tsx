@@ -6,7 +6,6 @@ import '../theme.css';
 import Header from '../components/header';
 import { Props } from '../utils/allProps';
 import AccountContext, { MyAppConsumer } from '../context/accountContext';
-import LazyLoad from 'react-lazyload';
 
 class Content extends Component<Props>{
 
@@ -26,11 +25,9 @@ class Content extends Component<Props>{
             <>
                 <AccountContext>
                     <Header back={this.props.back} currentPath={this.props.currentPath} enableToolbar={this.props.enableToolbar} />
-                    <LazyLoad>
                         <IonContent scrollEvents={true} fullscreen={true}>
                             {this.props.children}
                         </IonContent>
-                    </LazyLoad>
                 </AccountContext>
             </>
         )

@@ -11,6 +11,7 @@ import Routes , {MyRoutes} from '../utils/routes';
 import Lists from './lists';
 import AccountContext , {MyAppConsumer} from '../context/accountContext';
 import Account from './account';
+import LazyLoad from 'react-lazyload';
 
 export interface Props {
     children? : JSX.Element
@@ -70,11 +71,15 @@ class Home extends Component<Props , State>{
             <>
                <Content>
                     <div>
-                        <img src={ImgFirst} style={styleImg}/>
+                        <LazyLoad height={200}>
+                            <img src={ImgFirst} style={styleImg}/>
+                        </LazyLoad>
                     </div>
                         <div style={space}></div>
                         <div>
-                            <img src={ImgSecond} style={styleImg} />
+                            <LazyLoad height={200}>
+                                <img src={ImgSecond} style={styleImg} />
+                            </LazyLoad>
                         </div>
                         <div style={space}></div>
                         <div style={center}>
