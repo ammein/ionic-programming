@@ -5,7 +5,7 @@ import { Route,Link} from 'react-router-dom';
 import MyRoute, { MyRoutes } from '../utils/routes';
 import jsonProduct from '../utils/json/product.json';
 import {Laptops , Accessories , Desktops} from '../utils/allProps';
-import { IonCard , IonCardHeader , IonCardSubtitle ,IonCardContent , IonCardTitle, IonRippleEffect } from '@ionic/react';
+import { IonCard , IonCardHeader , IonCardSubtitle ,IonCardContent , IonCardTitle, IonRippleEffect, IonImg } from '@ionic/react';
 import AccountContext, { MyAppConsumer } from '../context/accountContext';
 import {Props} from '../utils/allProps';
 import View from '../pages/view';
@@ -57,9 +57,7 @@ class Lists extends Component<MyProps, State>{
                 return (
                     <IonCard key={index} class="ion-activatable" onClick={((event : Event)=> this.goToList(props.name))}>
                         <IonRippleEffect type="unbounded"></IonRippleEffect>
-                        <LazyLoad height={200}>
-                            <img src={props.imgProduct} style={style}></img>
-                        </LazyLoad>
+                            <IonImg src={props.imgProduct} style={style}></IonImg>
                         <IonCardHeader>
                             <IonCardSubtitle>{props.brand}</IonCardSubtitle>
                             <IonCardSubtitle>RM {props.price}</IonCardSubtitle>
@@ -79,9 +77,7 @@ class Lists extends Component<MyProps, State>{
                         return (
                             <IonCard key={index} class="ion-activatable" onClick={((event : Event)=> this.goToList(props.name))}>
                                 <IonRippleEffect type="unbounded"></IonRippleEffect>
-                                <LazyLoad height={200}>
-                                    <img src={props.imgProduct} style={style}></img>
-                                </LazyLoad>
+                                    <IonImg src={props.imgProduct} style={style}></IonImg>
                                 <IonCardHeader>
                                     <IonCardSubtitle>{props.brand}</IonCardSubtitle>
                                     <IonCardSubtitle>RM {props.price}</IonCardSubtitle>

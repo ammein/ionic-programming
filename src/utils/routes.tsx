@@ -1,15 +1,23 @@
-import React , {Component } from 'react';
+import React , {Component , lazy , Suspense } from 'react';
 import { Router, Route , Switch , BrowserRouter as Browser } from 'react-router-dom';
 var hashHistory = require("history").createHashHistory;
-import Arrivals from '../pages/arrivals';
-import Home from '../pages/home';
 var history = require('history').createBrowserHistory;
 import {IonPage, IonSplitPane, IonRouterOutlet} from '@ionic/react';
 import Menu from '../components/menu';
-import Lists from '../pages/lists';
 import {RoutesDef} from './allProps';
-import Account from '../pages/account';
 import View from '../pages/view';
+import MySuspense from '../HOC/suspense';
+import loadable from '@loadable/component';
+
+// import Home from '../pages/home';
+// import Account from '../pages/account';
+// import Lists from '../pages/lists';
+// import Arrivals from '../pages/arrivals';
+
+const Home = loadable(() => import('../pages/home'))
+const Account = loadable(() => import('../pages/account'))
+const Lists = loadable(() => import('../pages/lists'))
+const Arrivals = loadable(() => import('../pages/arrivals'))
 
 
 const MyRoutes : RoutesDef[] = [
@@ -104,17 +112,17 @@ class Routes extends Component<Props, State>{
     render(){
         return (
             <Router history={createHashHistory}>
-                {/* For Render List */}
-                <IonSplitPane contentId="main">
-                    <Menu/>
-                    {/* For Render Page with Route */}
-                    {/* Must use id="main" for let it main content */}
-                    <IonPage id="main">
-                        <IonRouterOutlet>
-                            {this.renderPath()}
-                        </IonRouterOutlet>
-                    </IonPage>
-                </IonSplitPane>
+                    {/* For Render List */}
+                    <IonSplitPane contentId="main">
+                        <Menu/>
+                        {/* For Render Page with Route */}
+                        {/* Must use id="main" for let it main content */}
+                        <IonPage id="main">
+                            <IonRouterOutlet>
+                                    {this.renderPath()}
+                            </IonRouterOutlet>
+                        </IonPage>
+                    </IonSplitPane>
             </Router>
         )
     }

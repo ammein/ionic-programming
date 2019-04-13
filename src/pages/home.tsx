@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonList, IonListHeader, IonButtons, IonRippleEffect } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonList, IonListHeader, IonButtons, IonRippleEffect , IonImg } from '@ionic/react';
 import {Link} from 'react-router-dom';
 import {getPath , getTitle} from '../utils/routes-utils';
 import Arrivals from './arrivals';
@@ -71,15 +71,11 @@ class Home extends Component<Props , State>{
             <>
                <Content>
                     <div>
-                        <LazyLoad height={200}>
-                            <img src={ImgFirst} style={styleImg}/>
-                        </LazyLoad>
+                        <IonImg src={ImgFirst} style={styleImg}></IonImg>
                     </div>
                         <div style={space}></div>
                         <div>
-                            <LazyLoad height={200}>
-                                <img src={ImgSecond} style={styleImg} />
-                            </LazyLoad>
+                        <IonImg src={ImgSecond} style={styleImg}></IonImg>
                         </div>
                         <div style={space}></div>
                         <div style={center}>
