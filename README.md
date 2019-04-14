@@ -196,6 +196,10 @@ cordova platform add ios
 
 # To add ios platform phonegap config.xml
 cordova platform add android
+
+# Open Android Studio
+# Choose File -> New -> Import Project
+# Select the Folder Android and Press Ok
 ```
 
 ## Bug Problem app not loading properly when install.
@@ -209,6 +213,18 @@ Add this in your config.xml :
 
 ---
 
+## Node JS Deploy
+> Deploy any of your `server.js` to Heroku.
+
+## Point Your Cordova Services to Heroku
+Modify www/js/services.js and specify the URL where your Node.js server is running :
+```js
+angular.module('directory.services', ['ngResource'])
+    .factory('Employees', function ($resource) {
+        return $resource('http://ionic-directory.herokuapp.com/employees/:employeeId/:data');
+    });
+```
+---
 ## Tips for Phonegap
 
 ### SVG
