@@ -62,9 +62,6 @@ ionic capacitor copy
 # Generate resources and config.xml on root project
 ionic integrations enable cordova --add
 
-# Reload resources , make sure login ionic first by running
-ionic cordova resources
-
 # Run on Android Studio or XCode
 ionic capacitor open <android|ios>
 ```
@@ -75,6 +72,14 @@ If you have Android Studio installed on different drive such as D: drive. You ma
     "windowsAndroidStudioPath" : "D:\\Android\\Android Studio\\bin\\studio64.exe"
 }
 ```
+
+## If you unable to eject device from Emulator Android Studio
+Run :
+```bash
+adb kill-server
+```
+
+> Make sure add to `Path` on System Variable to your `/Android/Sdk/platform-tools`. Local file located on `C:\Users\<Username>\AppData\Local\Android\Sdk\platform-tools`
 ---
 # Production Guide PhoneGap
 ```bash
