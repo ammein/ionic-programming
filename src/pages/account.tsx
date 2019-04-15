@@ -120,8 +120,9 @@ class Account extends Component<Props, State>{
                             <IonItem>
                                 <IonLabel position="floating">Full Name</IonLabel>
                             <IonInput 
+                            clearInput
                             placeholder="Your Full Name"
-                            onIonChange={((event : any) => this.renderChange(event))} 
+                            onIonInput={((event : any) => this.renderChange(event))} 
                             name="name"
                             value={this.state.name}
                             id="name"

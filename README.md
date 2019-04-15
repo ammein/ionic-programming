@@ -216,6 +216,16 @@ Add this in your config.xml :
 ## Node JS Deploy
 > Deploy any of your `server.js` to Heroku.
 
+Add this line into your `server.js` to enable all CORS origin :
+```js
+// CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
+```
+
 ## Point Your Cordova Services to Heroku
 Modify www/js/services.js and specify the URL where your Node.js server is running :
 ```js

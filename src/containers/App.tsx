@@ -8,11 +8,7 @@ import RouteApp from '../utils/routes';
 
 
 const App = () => (
-      <div id="app">
-        <IonApp>
-          <RouteApp />
-        </IonApp>
-      </div>
+    <RouteApp />
 );
 
 export default App;

@@ -9,7 +9,8 @@
       "esnext"
     ],
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "./src/index.d.ts"
     ],
     "allowJs": true,
     "skipLibCheck": true,

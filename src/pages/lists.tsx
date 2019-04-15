@@ -40,6 +40,7 @@ class Lists extends Component<MyProps, State>{
     {
         this.props.history.push("/lists/"+name);
     }
+    
     generateList(list : any) : any{
         const laptops = this.state.laptops;
         const desktops = this.state.desktops;
@@ -110,6 +111,7 @@ class Lists extends Component<MyProps, State>{
     }
 
     render(){
+        console.log("Get Path : \n", getPath(this.constructor));
         return(
             <>
                 <Content back={true} currentPath={getPath(this.constructor)}>

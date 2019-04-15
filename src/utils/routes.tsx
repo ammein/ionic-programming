@@ -9,15 +9,11 @@ import View from '../pages/view';
 import MySuspense from '../HOC/suspense';
 import loadable from '@loadable/component';
 
-// import Home from '../pages/home';
-// import Account from '../pages/account';
-// import Lists from '../pages/lists';
-// import Arrivals from '../pages/arrivals';
+import Home from '../pages/home';
+import Account from '../pages/account';
+import Lists from '../pages/lists';
+import Arrivals from '../pages/arrivals';
 
-const Home = loadable(() => import('../pages/home'))
-const Account = loadable(() => import('../pages/account'))
-const Lists = loadable(() => import('../pages/lists'))
-const Arrivals = loadable(() => import('../pages/arrivals'))
 
 
 const MyRoutes : RoutesDef[] = [

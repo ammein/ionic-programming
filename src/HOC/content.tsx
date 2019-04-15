@@ -25,9 +25,9 @@ class Content extends Component<Props>{
             <>
                 <AccountContext>
                     <Header back={this.props.back} currentPath={this.props.currentPath} enableToolbar={this.props.enableToolbar} />
-                        <IonContent scrollEvents={true} fullscreen={true}>
-                            {this.props.children}
-                        </IonContent>
+                    <IonContent scrollEvents={true} fullscreen={true}>
+                        {this.props.children}
+                    </IonContent>
                 </AccountContext>
             </>
         )
