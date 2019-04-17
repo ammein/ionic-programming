@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import App from './containers/App';
+import axios from 'axios';
+
+axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
 
 const startApp = () =>{
     ReactDOM.render(<App></App>, document.getElementById('root'));

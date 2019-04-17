@@ -29,7 +29,7 @@ const MyRoutes : RoutesDef[] = [
         path : "/arrivals",
         component : Arrivals,
         icon: "star",
-        menu : false
+        menu : true
     },
     {
         title : "Product Lists",

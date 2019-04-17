@@ -33,7 +33,7 @@ class Menu extends Component<Props, State>{
         const allRoutes = [...this.state.allRoutes];
 
         const filterRoutes: any[] = allRoutes.filter((value, index) => {
-            return value.menu === undefined;
+            return value.menu === undefined || value.menu;
         })
 
         return filterRoutes.map((props, index) =>{
