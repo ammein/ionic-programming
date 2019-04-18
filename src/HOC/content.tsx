@@ -22,14 +22,12 @@ class Content extends Component<Props>{
 
     render(){
         return (
-            <>
-                <AccountContext>
-                    <Header back={this.props.back} currentPath={this.props.currentPath} enableToolbar={this.props.enableToolbar} />
-                    <IonContent scrollEvents={true} fullscreen={true}>
-                        {this.props.children}
-                    </IonContent>
-                </AccountContext>
-            </>
+            <AccountContext>
+                <Header back={this.props.back} currentPath={this.props.currentPath} enableToolbar={this.props.enableToolbar} />
+                <IonContent scrollEvents={true} fullscreen={true}>
+                    {this.props.children}
+                </IonContent>
+            </AccountContext>
         )
     }
 }

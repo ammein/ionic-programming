@@ -10,11 +10,13 @@ import {space, RoutesDef} from '../utils/allProps';
 import Routes , {MyRoutes} from '../utils/routes';
 import Lists from './lists';
 import AccountContext , {MyAppConsumer} from '../context/accountContext';
-import Account from './account';
-import LazyLoad from 'react-lazyload';
+import { Storage, Plugins } from '@capacitor/core';
+
+const { App } = Plugins;
 
 export interface Props {
-    children? : JSX.Element
+    children? : JSX.Element,
+    history : any
 }
 
 type State = {
@@ -43,10 +45,6 @@ class Home extends Component<Props , State>{
         }
     }
 
-    renderList(){
-
-    }
-
     render(){
         const style : any = {
             fontSize : "20px"
@@ -66,6 +64,21 @@ class Home extends Component<Props , State>{
             alignItems: "center",
             justifyContent: "center"
         }
+
+        // Hacky "Object is possibly 'undefined' on App" . Therefore ,whenever you have that . Just put ! before the method like -> App!.addListener
+        App!.addListener("backButton", async (data: any) => {
+            const title: string = (window.location.hash.length > 1) ? window.location.hash.replace("#", "") : window.location.pathname;
+            console.log("Back Button : \n", data);
+            if (title === "/") {
+                console.log("Exiting App");
+                window.plugins.toast.show('Exiting App. Thank you for using the app.', 'long', 'bottom');
+                setTimeout(() => {
+                    App!.exitApp();
+                }, 1000);
+                return;
+            }
+            return this.props.history.goBack();
+        })
 
         return (
             <>
