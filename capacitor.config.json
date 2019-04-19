@@ -1,7 +1,7 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "My React App",
+  "appName": "Cart App",
   "bundledWebRuntime": false,
   "webDir": "www",
-  "windowsAndroidStudioPath" : "D:\\Android\\Android Studio\\bin\\studio64.exe"
+  "windowsAndroidStudioPath": "D:\\Android\\Android Studio\\bin\\studio64.exe"
 }

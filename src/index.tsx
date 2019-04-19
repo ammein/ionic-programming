@@ -10,10 +10,7 @@ axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
 
 var getUser = async (set: string) => {
     const user : any = await Storage.get({ key: set });
-    console.log("Get Storage User" , user);
-    console.log("Get Storage User Value" , user.value);
-    console.log("Get Storage User Name", JSON.parse(user.value).name);
-    if(user.value){
+    if(user.value && window.plugins){
         window.plugins.toast.show('Welcome ' + JSON.parse(user.value).name + '!', 'long', 'bottom')
     }
     return user;

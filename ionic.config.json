@@ -1,8 +1,7 @@
 {
-  "name": "My React App",
+  "name": "Cart App",
   "integrations": {
-    "capacitor": {},
-    "cordova": {}
+    "capacitor": {}
   },
   "type": "custom"
 }

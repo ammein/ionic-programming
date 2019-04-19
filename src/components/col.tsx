@@ -11,11 +11,6 @@ interface myState {
 }
 
 const col = (props : any) => {
-    // console.log("Props Row : \n", (props.index * 1) % props.next === 0);
-    var width = window.innerWidth > props.maxWidth;
-    var transformToArray = Children.toArray(props.children);
-    myArray = myArray.concat(transformToArray);
-    var pass = ((props.index * 1) % props.next === 0);
     return(
         <Aux>
             <IonCol>{props.children}</IonCol>

@@ -1,6 +1,6 @@
 import React, { Component, createRef, RefObject } from 'react';
 import Content from '../HOC/content';
-import { IonItem, IonLabel , IonInput , IonList, IonListHeader, IonButton , IonToast , IonItemDivider, IonCardContent, IonCard, IonIcon, IonImg } from '@ionic/react';
+import { IonItem, IonLabel , IonInput , IonList, IonListHeader, IonButton , IonToast , IonItemDivider, IonCardContent, IonCard, IonIcon, IonImg, IonButtons, IonText } from '@ionic/react';
 import AccountContext, { MyAppConsumer , AppContextInterface } from '../context/accountContext';
 import { Props } from '../utils/allProps';
 import { InputChangeEventDetail } from '@ionic/core';
@@ -8,7 +8,8 @@ import {Storage} from '@capacitor/core';
 
 interface State extends AppContextInterface{
     prevName? : string
-    showToast : boolean
+    showToast : boolean,
+    message? : string
 }
 
 class Account extends Component<Props, State>{
@@ -21,7 +22,9 @@ class Account extends Component<Props, State>{
     constructor(props: Props){
         super(props);
         this.state = {
-            showToast : false
+            showToast : false,
+            cart : [],
+            message : ""
         }
         this.handleSubmit= this.handleSubmit.bind(this);
         this.buttonElement = createRef();
@@ -29,16 +32,22 @@ class Account extends Component<Props, State>{
     }
 
     setStorage = async (set? : any) =>{
+        var obj : any = {};
+        obj["cart"] = [];
+        obj["cart"].push(this.state.cart);
         await Storage.set({
             key : "user",
             value : JSON.stringify({
-                name : (set) ? set : this.state.name
+                name : (set) ? set : this.state.name,
+                getCart : JSON.stringify(obj)
             })
         })
 
-        const user: any = await Storage.get({ key: set });
+        const user: any = await Storage.get({ key: (set) ? set : "user" });
 
-        this.context.name = JSON.parse(user.value).name;
+        if(user.value){
+            this.context.name = JSON.parse(user.value).name;
+        }
     }
 
     handleSubmit(e : Event | React.FormEvent){
@@ -52,35 +61,32 @@ class Account extends Component<Props, State>{
             return {
                 prevName : prevState.name,
                 name: this.state.name,
-                showToast: !toast
+                showToast: !toast,
+                message : "Account Saved"
             }
         })
     }
 
-    /**
-     * To update state based on previous State or context
-     * @param prevProps Previous Props
-     * @param prevState Previous States
-     */
-    getSnapshotBeforeUpdate(prevProps : any, prevState : any){
+    getSnapshotBeforeUpdate(prevProps : any, prevState : any){ 
+        this.setStorage();
         return {
-            name : (prevState.name) ? prevState.name : this.context.name
+            name : this.context.name,
+            cart: this.context.cart
         }
     }
 
-    /**
-     * Must do conditional state if prevState.name is not the same as snapshot.name. Else, it will caused an infinite loop
-     * This is for update state from changing pages , if not current state will always empty
-     * Get snapshot data previously from getSnapshotBeforeUpdate
-     * @param prevProps 
-     * @param prevState 
-     * @param snapshot 
-     */
     componentDidUpdate(prevProps : any, prevState : any, snapshot : any){
-        if(prevState.name !== snapshot.name){
+        if(
+            prevState.name !== snapshot.name ||
+            prevState.cart !== snapshot.cart
+            ){
             this.setState({
-                name : snapshot.name
+                name : snapshot.name,
+                cart : snapshot.cart
             })
+
+            this.context.name = snapshot.name;
+            this.context.cart = snapshot.cart;
         }
     }
 
@@ -110,15 +116,42 @@ class Account extends Component<Props, State>{
         }
     };
 
+    clearCart = (id : any) =>{
+        const getCart = this.state.cart!.filter((el :any , i : number,arr : any[])=>{
+            return i !== id;
+        });
+
+        this.setState((prevState : any , props : any)=>{
+            this.context.cart = getCart;
+            return {
+                cart : getCart
+            }
+        })
+    }
+
+    clearAllCart = () =>{
+        return this.setState((prevState : any , props : any)=>{
+            this.context.cart = [];
+            return {
+                cart : [],
+                message : "You have paid all items",
+                showToast : true
+            }
+        })
+    }
+
     renderCart = () =>{
-        return this.context.cart.map((val: any , i : number , arr : any[])=>{
+        return this.state.cart!.map((val: any , i : number , arr : any[])=>{
             return (<IonCard key={i + val.name}>
                 <IonItem>
                     <IonImg src={val.imgProduct} style={{
                         maxWidth: "100px"
                     }}></IonImg>
                     <IonLabel>{val.name}</IonLabel>
-                    <IonButton fill="outline" slot="end" onClick={() => this.props.history.push("/lists/" + val.name)}>View</IonButton>
+                    <IonButtons>
+                    <IonButton color="primary" fill="solid" slot="end" onClick={() => this.props.history.push("/lists/" + val.name)}>View</IonButton>
+                    <IonButton color="danger" fill="outline" slot="end" onClick={this.clearCart.bind(this , i)}>Delete</IonButton>
+                    </IonButtons>
                 </IonItem>
                 <IonItem>
                     <IonLabel color="medium" style={{
@@ -137,8 +170,6 @@ class Account extends Component<Props, State>{
             fontSize : "20px"
         }
 
-        this.setStorage();
-
         return(
             <Content>
                 <IonToast
@@ -147,7 +178,7 @@ class Account extends Component<Props, State>{
                     style={{
                         fontSize : "20px"
                     }}
-                    message='Account Saved'
+                    message={this.state.message}
                     closeButtonText="Okay"
                     showCloseButton={true}
                     duration={1000}
@@ -155,12 +186,13 @@ class Account extends Component<Props, State>{
                 </IonToast>
                     <IonList>
                         <IonListHeader>
-                            <IonLabel style={styleHeaderList}>
-                                Your Cart (Total {this.context.cart.length})
+                            <IonLabel color="medium-shade" style={styleHeaderList}>
+                                Your Cart (Total {this.state.cart!.length})
                             </IonLabel>
                         </IonListHeader>
                         {this.renderCart()}
                         {this.context.cart.length > 0 ? 
+                        <>
                         <IonItem>
                             <IonLabel color="danger" style={{
                                 fontSize : "32px",
@@ -173,13 +205,21 @@ class Account extends Component<Props, State>{
                                     return parseFloat(parseFloat(val) + next.price).toFixed(2)
                                 } , 0)}
                             </IonLabel>
-                        </IonItem> : null}
+                        </IonItem>
+                        <IonButton color="primary" fill="solid" expand="block" size="default" onClick={this.clearAllCart.bind(this)}>
+                            Pay Now
+                        </IonButton>
+                        </> : <IonText color="medium">
+                            <p style={{
+                                textAlign : "center"
+                            }}>Cart Empty</p>
+                        </IonText>}
                         <div style={{
                             marginTop : "50px"
                         }}></div>
                         <IonItemDivider></IonItemDivider>
                             <IonListHeader>
-                                <IonLabel style={styleHeaderList}>Edit Account</IonLabel>
+                                <IonLabel color="medium-shade" style={styleHeaderList}>Edit Account</IonLabel>
                             </IonListHeader>
                         <div style={{marginTop : "20px"}}></div>
                         <form onSubmit={this.handleSubmit}>
@@ -196,6 +236,7 @@ class Account extends Component<Props, State>{
                             </IonItem>
                             <IonButton 
                             expand="full" 
+                            size="default"
                             slot="end" 
                             style={{
                                 bottom: "0"

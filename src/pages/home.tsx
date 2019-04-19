@@ -65,20 +65,33 @@ class Home extends Component<Props , State>{
             justifyContent: "center"
         }
 
-        // Hacky "Object is possibly 'undefined' on App" . Therefore ,whenever you have that . Just put ! before the method like -> App!.addListener
-        App!.addListener("backButton", async (data: any) => {
-            const title: string = (window.location.hash.length > 1) ? window.location.hash.replace("#", "") : window.location.pathname;
-            console.log("Back Button : \n", data);
-            if (title === "/") {
-                console.log("Exiting App");
-                window.plugins.toast.show('Exiting App. Thank you for using the app.', 'long', 'bottom');
-                setTimeout(() => {
-                    App!.exitApp();
-                }, 1000);
-                return;
+        var getUser = async () => {
+            const user: any = await Storage.get({key : "user"} as any);
+
+            if(window.plugins){
+                this.context.name = (JSON.parse(user.value).name === undefined) ? "" : JSON.parse(user.value).name;
+                this.context.cart = [...(JSON.parse(user.value).getCart.cart === undefined) ? {} : JSON.parse(user.value).getCart.cart]
             }
-            return this.props.history.goBack();
-        })
+            return;
+        }
+
+        getUser();
+
+        // Hacky "Object is possibly 'undefined' on App" . Therefore ,whenever you have that . Just put ! before the method like -> App!.addListener
+        if(window.plugins){
+            App!.addListener("backButton", async (data: any) => {
+                const title: string = (window.location.hash.length > 1) ? window.location.hash.replace("#", "") : window.location.pathname;
+                if (title === "/") {
+                    console.log("Exiting App");
+                    window.plugins.toast.show('Exiting App. Thank you for using the app.', 'long', 'bottom');
+                    setTimeout(() => {
+                        App!.exitApp();
+                    }, 1000);
+                    return;
+                }
+                return this.props.history.goBack();
+            })
+        }
 
         return (
             <>
