@@ -169,6 +169,37 @@ angular.module('directory.services', ['ngResource'])
 ```
 ---
 
+# Typescript tips
+
+Encounter :
+```bash
+Object is possibly null
+```
+
+Solution : 
+> Simply add `!.method()` or `object.data!.data`
+```tsx
+// this.state.cart may be undefined
+this.state!.cart
+
+// obj.data.hey may be undefined
+obj.data!.hey
+
+// obj.data.map(()=> ) may be undefined
+obj.data!.map(() =>)
+```
+
+Flexible set state based on input :
+```tsx
+// For dynamically update state based on target value
+this.setState({ [id]: e.currentTarget.value } as Pick<State, keyof State>);
+```
+
+`JSON.parse()`, `JSON.stringify()` or any method available shows an alert of `does not exist in type of {key : string}` :
+```tsx
+const user: any = await Storage.get({key : "user"} as any);
+```
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
