@@ -86,6 +86,29 @@ adb kill-server
 ```
 
 > Make sure add to `Path` on System Variable to your `/Android/Sdk/platform-tools`. Local file located on `C:\Users\<Username>\AppData\Local\Android\Sdk\platform-tools`
+
+### React Router
+For react router typescript , you need these `hashRouter` to make it run normally on `file://` . But first install history npm dependencies :
+
+```bash
+# Ofcourse , install the dependencies first
+npm i -S history
+npm i -S react-router-dom
+```
+On Your Code :
+
+```tsx
+import { Router } from 'react-router-dom';
+var hashHistory = require("history").createHashHistory;
+
+// Use hashHistory for phonegap app enable
+const createHashHistory = hashHistory();
+
+<Router history={createHashHistory}>
+ {/* Other Route here */}
+</Router>
+```
+
 ---
 # Production Guide PhoneGap
 ```bash
@@ -237,7 +260,7 @@ app.all('*', function(req, res, next) {
 });
 ```
 
-## Point Your Cordova Services to Heroku
+## Point Your Cordova Services to Heroku (Angular/Cordova Framework)
 Modify www/js/services.js and specify the URL where your Node.js server is running :
 ```js
 angular.module('directory.services', ['ngResource'])
@@ -252,27 +275,6 @@ angular.module('directory.services', ['ngResource'])
 
 For SVG Image , you cannot load it via `file://` . Therefore , you need to use normal `<img src="/path/to/svg"/>`.
 
-### React Router
-For react router typescript , you need these `hashRouter` to make it run normally on `file://` . But first install history npm dependencies :
-
-```bash
-# Ofcourse , install the dependencies first
-npm i -S history
-npm i -S react-router-dom
-```
-On Your Code :
-
-```tsx
-import { Router } from 'react-router-dom';
-var hashHistory = require("history").createHashHistory;
-
-// Use hashHistory for phonegap app enable
-const createHashHistory = hashHistory();
-
-<Router history={createHashHistory}>
- {/* Other Route here */}
-</Router>
-```
 ---
 
 ## Learn More
