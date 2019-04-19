@@ -1,44 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Installation Setup
+```bash
+# Install the Create React App CLI.
 
+npm install -g create-react-app
 
-## Available Scripts
+# Install the Cordova CLI.
 
-In the project directory, you can run:
+npm install -g cordova
 
-## First Run Installation `npm install` before `npm start` .
+# Create the project.
 
-### `npm start`
+create-react-app tutorial --typsescript
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Install Ionic and dependencies
+npm install --save typescript @types/node @types/react @types/react-dom @types/jest @ionic/core @ionic/react
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+# or
 
-### `npm test`
+yarn add typescript @types/node @types/react @types/react-dom @types/jest @ionic/core @ionic/react
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Because we will be editing the Webpack configuration, go to your Create React App project directory and run:
 
-### `npm run build`
+yarn run eject
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Go to your `config/paths.js` file and change :
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+`appBuild: resolveApp('build')` to `appBuild: resolveApp('www')`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> Because your files will be served from `file://` (https://github.com/facebookincubator/create-react-app/issues/1094)
 
-### `npm run eject`
+Add this line to your `package.json` :
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```json
+"homepage": "."
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Next modify your `index.js` so it looks like:
+```js
+const startApp = () => {
+  ReactDOM.render(<App />, document.getElementById('root'));
+  registerServiceWorker();
+};
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+if(window.cordova) {
+  document.addEventListener('deviceready', startApp, false);
+} else {
+  startApp();
+}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+or in `index.tsx` Typescript format :
+```tsx
+const startApp = () =>{
+    ReactDOM.render(<App></App>, document.getElementById('root'));
+
+    // If you want your app to work offline and load faster, you can change
+    // unregister() to register() below. Note this comes with some pitfalls.
+    // Learn more about service workers: https://bit.ly/CRA-PWA
+    serviceWorker.register();
+}
+
+if (window.cordova) {
+    document.addEventListener('deviceready', startApp, false);
+} else {
+    startApp();
+}
+
+declare global{
+    interface Window {
+        cordova : any
+    }
+}
+```
 
 ---
 
@@ -110,144 +144,8 @@ const createHashHistory = hashHistory();
 ```
 
 ---
-# Production Guide PhoneGap
-```bash
-# Install the Create React App CLI.
 
-npm install -g create-react-app
-
-# Install the Cordova CLI.
-
-npm install -g cordova
-
-# Create the project.
-
-create-react-app tutorial --typsescript
-
-# Install Ionic and dependencies
-npm install --save typescript @types/node @types/react @types/react-dom @types/jest @ionic/core @ionic/react
-
-# or
-
-yarn add typescript @types/node @types/react @types/react-dom @types/jest @ionic/core @ionic/react
-
-# Because we will be editing the Webpack configuration, go to your Create React App project directory and run:
-
-yarn run eject
-```
-
-Go to your `config/paths.js` file and change :
-
-`appBuild: resolveApp('build')` to `appBuild: resolveApp('www')`
-
-> Because your files will be served from `file://` (https://github.com/facebookincubator/create-react-app/issues/1094)
-
-Add this line to your `package.json` :
-
-```json
-"homepage": "."
-```
-
-> This is specific to create-react-app. In other projects you would need to ensure your paths are not prepended with a /.
-
-Now we will need some files from a Cordova project :
-
-```bash
-# Tips : Install in your react root folder
-cordova create tutorial com.example.tutorial Tutorial
-
-# Go to Tutorial folder
-cd Tutorial
-
-# Install these basic plugins
-cordova plugin add cordova-plugin-file cordova-plugin-media cordova-plugin-splashscreen cordova-plugin-statusbar cordova-plugin-whitelist
-```
-> NOTE : The `res` directory would be where you would place icons and splash screens.
-
-Next modify your `index.js` so it looks like:
-```js
-const startApp = () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
-  registerServiceWorker();
-};
-
-if(window.cordova) {
-  document.addEventListener('deviceready', startApp, false);
-} else {
-  startApp();
-}
-```
-
-or in `index.tsx` Typescript format :
-```tsx
-const startApp = () =>{
-    ReactDOM.render(<App></App>, document.getElementById('root'));
-
-    // If you want your app to work offline and load faster, you can change
-    // unregister() to register() below. Note this comes with some pitfalls.
-    // Learn more about service workers: https://bit.ly/CRA-PWA
-    serviceWorker.register();
-}
-
-if (window.cordova) {
-    document.addEventListener('deviceready', startApp, false);
-} else {
-    startApp();
-}
-
-declare global{
-    interface Window {
-        cordova : any
-    }
-}
-```
-
-And add these to `index.html` :
-```html
-<meta name="format-detection" content="telephone=no">
-<meta name="msapplication-tap-highlight" content="no">
-
-<script type="text/javascript" src="cordova.js"></script>
-```
-
-Now we can build our output to the `www` directory.
-
-```bash
-yarn run build
-```
-
-Then Copy your `www` folder into `Tutorial/www`
-
-The rest of these instructions have files and changes that are not in the current repository due to the nature of the dependencies that have to be brought down. Also I didn't want to tie the tutorial down with specific versions of Android and iOS.
-
-To target platforms:
-```bash
-# Go to your created cordova project
-cd Tutorial
-
-# To add android platform phonegap config.xml
-cordova platform add ios
-
-# To add ios platform phonegap config.xml
-cordova platform add android
-
-# Open Android Studio
-# Choose File -> New -> Import Project
-# Select the Folder Android and Press Ok
-```
-
-## Bug Problem app not loading properly when install.
-
-Add this in your config.xml :
-
-```xml
-<!-- Bug found on apps loading crashed -->
-<preference name="loadUrlTimeoutValue" value="700000" />
-```
-
----
-
-## Node JS Deploy
+## Node JS Deploy Server
 > Deploy any of your `server.js` to Heroku.
 
 Add this line into your `server.js` to enable all CORS origin :
@@ -268,13 +166,6 @@ angular.module('directory.services', ['ngResource'])
         return $resource('http://ionic-directory.herokuapp.com/employees/:employeeId/:data');
     });
 ```
----
-## Tips for Phonegap
-
-### SVG
-
-For SVG Image , you cannot load it via `file://` . Therefore , you need to use normal `<img src="/path/to/svg"/>`.
-
 ---
 
 ## Learn More
